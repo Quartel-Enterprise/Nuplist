@@ -1,21 +1,20 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+## Description
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+This is a Compose Multiplatform project targeting Android, iOS and Desktop for wedding.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+---
 
+## Prerequisites
+1) **Google Cloud project**: Go to the [Google Cloud Platform](https://console.cloud.google.com/home/dashboard) and create a new project if necessary.
+2) **Supabase project**: Create a project in [supabase](https://supabase.com/).
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
-
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+## Configuration
+1) Configure OAuth credentials for your Google Cloud project in the Credentials page of the console. When creating a new OAuth client ID, choose WEB. 
+2) Configure the [OAuth Consent Screen](https://console.cloud.google.com/apis/credentials/consent). This information is shown to the user when giving consent to your app. In particular, make sure you have set up links to your app's privacy policy and terms of service.
+3) Add the client ID from previous step in the [Google provider on the Supabase Dashboard](https://supabase.com/dashboard/project/_/auth/providers), under Client IDs.
+4) Create a file `local.properties` (if it doesn't exist yet) in the root of the project. Add the following:
+```
+SUPABASE_URL=<your supabase project url>
+SUPABASE_API_KEY=<your supabase url key>
+WEB_GOOGLE_CLIENT_ID=<your google web client id>
+```
