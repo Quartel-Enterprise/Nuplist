@@ -1,0 +1,5 @@
+<resources>
+    <string name="home">Início</string>
+    <string name="guest_list">Lista</string>
+    <string name="settings">Configurações</string>
+</resources>

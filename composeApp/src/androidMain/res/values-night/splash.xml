@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Nuplist.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FF99C1</item>
+        <item name="postSplashScreenTheme">@android:style/Theme.Material.Light.NoActionBar</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/android_splash</item>
+    </style>
+</resources>
