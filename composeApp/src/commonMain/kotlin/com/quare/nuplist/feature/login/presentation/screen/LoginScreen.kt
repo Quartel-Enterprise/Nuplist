@@ -15,6 +15,6 @@ fun LoginScreen(
         type = GoogleDialogType.BOTTOM_SHEET,
     )
     LoginScreenContent(
-        onLoginClick = authState::startFlow,
+        onLoginWithGoogleClick = authState::startFlow,
     )
 }

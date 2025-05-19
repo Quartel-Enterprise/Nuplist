@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}}</title>
+    <link rel="icon" href="{{ICON}}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth_success_template_dark.css">
+</head>
+<body>
+<div class="message-container">
+    <h1>{{TITLE}}</h1>
+    <p>{{TEXT}}</p>
+</div>
+<script>
+    const newURL = location.href.split("?")[0];
+    window.history.replaceState({}, document.title, newURL);
+</script>
+</body>
+</html>
