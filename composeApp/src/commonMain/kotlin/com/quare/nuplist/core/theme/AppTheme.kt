@@ -4,23 +4,30 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.quare.nuplist.core.theme.color.lightScheme
 import com.quare.nuplist.core.theme.color.darkScheme
+import com.quare.nuplist.core.theme.color.lightScheme
 
 @Composable
 fun AppTheme(
-    specificColors: ColorScheme? = null,
-    content: @Composable () -> Unit
+    getSpecificColors: @Composable ((Boolean) -> ColorScheme?)? = null,
+    content: @Composable () -> Unit,
 ) {
+    val isDarkTheme = isAppInDarkTheme()
     MaterialTheme(
-        colorScheme = specificColors ?: getColorScheme(),
+        colorScheme = getSpecificColors?.invoke(isDarkTheme) ?: getColorScheme(isDarkTheme),
         content = content
     )
 }
 
 @Composable
-private fun getColorScheme(): ColorScheme {
-    val isDarkTheme = isSystemInDarkTheme()
+fun isAppInDarkTheme(): Boolean = when (LocalThemeOption.current) {
+    ThemeOption.LIGHT -> false
+    ThemeOption.DARK -> true
+    ThemeOption.SYSTEM -> isSystemInDarkTheme()
+}
+
+@Composable
+private fun getColorScheme(isDarkTheme: Boolean): ColorScheme {
     return when {
         isDarkTheme -> darkScheme
         else -> lightScheme

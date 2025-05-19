@@ -1,6 +1,7 @@
 package com.quare.nuplist
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.quare.nuplist.app.presentation.App
 import com.quare.nuplist.di.initializeKoin
 import platform.UIKit.UIViewController
 

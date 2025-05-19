@@ -14,8 +14,8 @@ fun RootAppNavHost() {
     val viewmodel: RootNavigationViewModel = koinViewModel()
     val firstScreen by viewmodel.firstScreen.collectAsState()
     when (firstScreen) {
-        RootNavigation.LOADING -> Unit
-        RootNavigation.LOGIN -> LoginScreen()
-        RootNavigation.MAIN -> MainScreen()
+        RootNavigation.Loading -> Unit
+        RootNavigation.Login -> LoginScreen()
+        RootNavigation.Main -> MainScreen()
     }
 }

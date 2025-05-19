@@ -55,6 +55,9 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(compose.material3AdaptiveNavigationSuite)
 
+            // Coil
+            implementation(libs.coil.compose)
+
             // AndroidX
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)

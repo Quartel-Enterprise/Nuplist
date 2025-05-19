@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class RootNavigationViewModel(
     supabaseClient: SupabaseClient,
 ) : ViewModel() {
-    private val _firstScreen: MutableStateFlow<RootNavigation> = MutableStateFlow(RootNavigation.LOADING)
+    private val _firstScreen: MutableStateFlow<RootNavigation> = MutableStateFlow(RootNavigation.Loading)
     val firstScreen: StateFlow<RootNavigation> = _firstScreen
 
     init {
@@ -22,10 +22,10 @@ class RootNavigationViewModel(
             supabaseClient.auth.sessionStatus.collect { sessionStatus ->
                 _firstScreen.update {
                     when(sessionStatus) {
-                        is SessionStatus.Authenticated -> RootNavigation.MAIN
-                        SessionStatus.Initializing -> RootNavigation.LOADING
-                        is SessionStatus.NotAuthenticated -> RootNavigation.LOGIN
-                        is SessionStatus.RefreshFailure -> RootNavigation.LOGIN
+                        is SessionStatus.Authenticated -> RootNavigation.Main
+                        SessionStatus.Initializing -> RootNavigation.Loading
+                        is SessionStatus.NotAuthenticated -> RootNavigation.Login
+                        is SessionStatus.RefreshFailure -> RootNavigation.Login
                     }
                 }
             }

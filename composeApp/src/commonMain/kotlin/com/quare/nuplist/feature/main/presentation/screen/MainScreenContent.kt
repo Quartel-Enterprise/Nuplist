@@ -46,7 +46,12 @@ fun MainScreenContent(
             }
         },
         content = {
-            Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues: PaddingValues ->
+            Scaffold(
+                topBar = {
+                    
+                },
+                modifier = Modifier.fillMaxSize()
+            ) { paddingValues: PaddingValues ->
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
