@@ -18,4 +18,5 @@
     <string name="light">Claro</string>
     <string name="dark">Escuro</string>
     <string name="system">Sistema</string>
+    <string name="add_guest">Adicionar convidado</string>
 </resources>

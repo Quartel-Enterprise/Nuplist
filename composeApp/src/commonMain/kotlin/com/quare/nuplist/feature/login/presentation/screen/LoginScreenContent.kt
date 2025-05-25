@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.quare.nuplist.feature.login.presentation.component.FlowersImage
 import com.quare.nuplist.feature.login.presentation.viewmodel.LoginUiEvent
 import com.quare.nuplist.ui.spacer.VerticalSpacer
 import nuplist.composeapp.generated.resources.Res
@@ -52,6 +53,7 @@ fun LoginScreenContent(
             Column(
                 modifier = Modifier.align(Alignment.Center),
                 verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
                     text = stringResource(Res.string.login_headline),
@@ -59,7 +61,9 @@ fun LoginScreenContent(
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.SemiBold
                 )
-                VerticalSpacer()
+                VerticalSpacer(48)
+                FlowersImage()
+                VerticalSpacer(48)
                 LoginWithGoogleButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onLoginWithGoogleClick,

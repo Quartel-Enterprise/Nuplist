@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.buildkonfig.plugin)
+    alias(libs.plugins.composeHotReload)
 }
 
 kotlin {

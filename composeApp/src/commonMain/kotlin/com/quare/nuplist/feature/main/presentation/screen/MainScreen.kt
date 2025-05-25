@@ -6,7 +6,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.quare.nuplist.feature.main.presentation.navhost.MainNavHost
+import com.quare.nuplist.feature.main.presentation.navhost.BottomNavHost
 import com.quare.nuplist.feature.main.presentation.viewmodel.MainScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -18,10 +18,10 @@ fun MainScreen(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     MainScreenContent(
         currentDestination = navBackStackEntry?.destination,
-        topLevelRoutes = mainViewModel.topLevelRoutes,
+        bottomNavHosts = mainViewModel.bottomNavHosts,
         onItemClick = navController::onItemClick,
         content = {
-            MainNavHost(navController)
+            BottomNavHost(navController)
         }
     )
 }

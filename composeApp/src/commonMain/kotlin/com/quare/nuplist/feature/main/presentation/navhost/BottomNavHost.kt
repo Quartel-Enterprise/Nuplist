@@ -10,7 +10,7 @@ import com.quare.nuplist.feature.main.presentation.model.MainNavRoute
 import com.quare.nuplist.feature.settings.presentation.SettingsScreen
 
 @Composable
-fun MainNavHost(navController: NavHostController) {
+fun BottomNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = MainNavRoute.Home,

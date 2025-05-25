@@ -18,4 +18,5 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="system">System</string>
+    <string name="add_guest">Add guest</string>
 </resources>

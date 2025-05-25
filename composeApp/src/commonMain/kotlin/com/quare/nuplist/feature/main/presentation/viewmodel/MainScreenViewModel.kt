@@ -5,9 +5,10 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.lifecycle.ViewModel
+import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
 import com.quare.nuplist.feature.main.presentation.model.MainNavRoute
-import com.quare.nuplist.feature.main.presentation.model.TopLevelRoute
+import com.quare.nuplist.feature.main.presentation.model.BottomNavHost
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.guest_list
 import nuplist.composeapp.generated.resources.home
@@ -21,9 +22,13 @@ class MainScreenViewModel : ViewModel() {
         MainNavRoute.Settings,
     )
 
-    val topLevelRoutes: List<TopLevelRoute<Any>> = routes.map { it.toTopLevelRoute() }
+    val bottomNavHosts: List<BottomNavHost<Any>> = routes.map { it.toBottomNavHost() }
 
-    private fun MainNavRoute.toTopLevelRoute(): TopLevelRoute<Any> = TopLevelRoute(
+    fun dispatchUiEvent(event: MainScreenUiEvent) {
+
+    }
+
+    private fun MainNavRoute.toBottomNavHost(): BottomNavHost<Any> = BottomNavHost(
         route = this,
         presentationModel = when (this) {
             MainNavRoute.Home -> BottomNavigationItemPresentationModel(
