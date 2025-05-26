@@ -3,7 +3,7 @@ package com.quare.nuplist.core.config
 import com.quare.nuplist.BuildKonfig
 import com.quare.nuplist.app.domain.GetThemeOptionUseCase
 import com.quare.nuplist.app.presentation.AppViewModel
-import com.quare.nuplist.ui.dialog.profile.ProfileDialogViewModel
+import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialogViewModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.AuthConfig

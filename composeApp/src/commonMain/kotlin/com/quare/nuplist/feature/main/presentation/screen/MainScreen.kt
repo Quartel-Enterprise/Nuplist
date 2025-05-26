@@ -10,8 +10,8 @@ import com.quare.nuplist.core.utils.ActionCollector
 import com.quare.nuplist.feature.main.domain.MainScreenUiAction
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
 import com.quare.nuplist.feature.main.presentation.viewmodel.MainScreenViewModel
-import com.quare.nuplist.ui.dialog.profile.ProfileDialog
-import com.quare.nuplist.ui.dialog.profile.model.LogoutModel
+import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialog
+import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
 
 @Composable
 fun MainScreen(

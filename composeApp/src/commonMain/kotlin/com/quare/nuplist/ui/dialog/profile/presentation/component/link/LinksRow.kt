@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile.component.link
+package com.quare.nuplist.ui.dialog.profile.presentation.component.link
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.quare.nuplist.ui.dialog.profile.model.WebLink
+import com.quare.nuplist.ui.dialog.profile.presentation.model.WebLink
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.privacy_policy
 import nuplist.composeapp.generated.resources.terms_of_service

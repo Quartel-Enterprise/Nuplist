@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.quare.nuplist.feature.login.presentation.viewmodel.LoginUiEvent
 import com.quare.nuplist.feature.login.presentation.viewmodel.LoginViewModel
-import com.quare.nuplist.ui.dialog.profile.ProfileDialog
+import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialog
 import io.github.jan.supabase.compose.auth.composable.GoogleDialogType
 import io.github.jan.supabase.compose.auth.composable.NativeSignInState
 import io.github.jan.supabase.compose.auth.composable.rememberSignInWithGoogle

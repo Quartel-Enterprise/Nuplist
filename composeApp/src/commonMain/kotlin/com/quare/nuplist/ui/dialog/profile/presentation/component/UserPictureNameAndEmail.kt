@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile.component
+package com.quare.nuplist.ui.dialog.profile.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

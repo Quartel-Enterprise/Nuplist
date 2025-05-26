@@ -12,7 +12,7 @@ import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.ThemeSelectorV
 import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.themeSelectorViewModel
 
 @Composable
-fun ThemeSelector(
+fun Selector(
     currentTheme: ThemeOption,
     onThemeChange: (ThemeOption) -> Unit,
     modifier: Modifier = Modifier,

@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile.component.link
+package com.quare.nuplist.ui.dialog.profile.presentation.component.link
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton

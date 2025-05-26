@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile.model
+package com.quare.nuplist.ui.dialog.profile.presentation.model
 
 enum class WebLink(val suffix: String) {
     PRIVACY_POLICY("termos-de-uso"),

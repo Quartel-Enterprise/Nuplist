@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile.model
+package com.quare.nuplist.ui.dialog.profile.presentation.model
 
 data class ProfileDialogState(
     val userName: String,

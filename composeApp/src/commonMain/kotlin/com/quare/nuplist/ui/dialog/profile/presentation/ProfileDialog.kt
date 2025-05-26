@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.profile
+package com.quare.nuplist.ui.dialog.profile.presentation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -10,8 +10,8 @@ import com.quare.nuplist.core.theme.LocalThemeChanged
 import com.quare.nuplist.core.theme.LocalThemeOption
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.core.utils.ActionCollector
-import com.quare.nuplist.ui.dialog.profile.model.LogoutModel
-import com.quare.nuplist.ui.dialog.profile.model.ProfileDialogUiAction
+import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
+import com.quare.nuplist.ui.dialog.profile.presentation.model.ProfileDialogUiAction
 import org.koin.compose.viewmodel.koinViewModel
 
 private const val CONTENT_FILL_PERCENTAGE = 0.9f

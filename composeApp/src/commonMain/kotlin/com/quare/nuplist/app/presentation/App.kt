@@ -28,7 +28,7 @@ fun App(
             onThemeChanged = viewModel::onThemeChange,
         ) {
             AppTheme(getSpecificColors) {
-                InitializeLanguage()
+//                InitializeLanguage()
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
