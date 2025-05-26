@@ -1,39 +1,32 @@
 package com.quare.nuplist.feature.main.presentation.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.quare.nuplist.feature.main.presentation.navhost.BottomNavHost
+import androidx.navigation.NavBackStackEntry
+import com.quare.nuplist.core.user.domain.model.UserModel
+import com.quare.nuplist.core.utils.ActionCollector
+import com.quare.nuplist.feature.main.domain.MainScreenUiAction
 import com.quare.nuplist.feature.main.presentation.viewmodel.MainScreenViewModel
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(
-    mainViewModel: MainScreenViewModel = koinViewModel(),
+    userModel: UserModel,
+    mainViewModel: MainScreenViewModel,
+    navBackStackEntry: NavBackStackEntry?,
+    goToBottomNavRoute: (Any) -> Unit,
+    goToAddGuest: () -> Unit,
+    bottomNavHost: @Composable () -> Unit,
 ) {
-    val navController: NavHostController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    ActionCollector(mainViewModel.uiAction) { uiAction ->
+        when (uiAction) {
+            is MainScreenUiAction.NavigateToBottomRoute -> goToBottomNavRoute(uiAction.route)
+            MainScreenUiAction.NavigateToAddGuest -> goToAddGuest()
+        }
+    }
     MainScreenContent(
         currentDestination = navBackStackEntry?.destination,
-        bottomNavHosts = mainViewModel.bottomNavHosts,
-        onItemClick = navController::onItemClick,
-        content = {
-            BottomNavHost(navController)
-        }
+        bottomNavigationModels = mainViewModel.bottomNavigationItemModels,
+        onEvent = mainViewModel::dispatchUiEvent,
+        content = bottomNavHost,
+        userModel = userModel,
     )
 }
-
-private fun NavHostController.onItemClick(route: Any) {
-    navigate(route) {
-        popUpTo(graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
-    }
-}
-
-

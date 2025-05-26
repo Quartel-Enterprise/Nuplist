@@ -17,26 +17,34 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
-import com.quare.nuplist.feature.main.presentation.model.BottomNavHost
+import com.quare.nuplist.core.user.domain.model.UserModel
+import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
+import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
+import com.quare.nuplist.feature.main.presentation.screen.component.MainAppBarComponent
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.add_guest
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun MainScreenContent(
+    userModel: UserModel,
     currentDestination: NavDestination?,
-    bottomNavHosts: List<BottomNavHost<Any>>,
-    onItemClick: (Any) -> Unit,
+    bottomNavigationModels: List<BottomNavigationItemModel<Any>>,
+    onEvent: (MainScreenUiEvent) -> Unit,
     content: @Composable () -> Unit,
 ) {
     NavigationSuiteScaffold(
         navigationSuiteItems = {
-            bottomNavHosts.forEach { bottomNavHost: BottomNavHost<Any> ->
-                val presentationItem = bottomNavHost.presentationModel
+            bottomNavigationModels.forEach { bottomNavigationItemModel: BottomNavigationItemModel<Any> ->
+                val presentationItem = bottomNavigationItemModel.presentationModel
                 item(
-                    selected = isSelected(currentDestination, bottomNavHost),
+                    selected = isSelected(currentDestination, bottomNavigationItemModel),
                     onClick = {
-                        onItemClick(bottomNavHost.route)
+                        onEvent(
+                            MainScreenUiEvent.BottomNavItemClicked(
+                                bottomNavigationItemModel.route,
+                            )
+                        )
                     },
                     icon = {
                         Icon(
@@ -53,12 +61,17 @@ fun MainScreenContent(
         content = {
             Scaffold(
                 topBar = {
-
+                    MainAppBarComponent(
+                        userPhoto = userModel.photo,
+                        onEvent = onEvent,
+                    )
                 },
                 floatingActionButton = {
                     val text = stringResource(Res.string.add_guest)
                     ExtendedFloatingActionButton(
-                        onClick = { },
+                        onClick = {
+                            onEvent(MainScreenUiEvent.AddGuestClicked)
+                        },
                         icon = {
                             Icon(
                                 imageVector = Icons.Default.Add,
@@ -74,7 +87,7 @@ fun MainScreenContent(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     content()
                 }
@@ -85,7 +98,7 @@ fun MainScreenContent(
 
 private fun isSelected(
     currentDestination: NavDestination?,
-    bottomNavHost: BottomNavHost<Any>,
+    bottomNavigationItemModel: BottomNavigationItemModel<Any>,
 ): Boolean = currentDestination?.hierarchy?.any { navDestination: NavDestination ->
-    navDestination.hasRoute(bottomNavHost.route::class)
+    navDestination.hasRoute(bottomNavigationItemModel.route::class)
 } ?: false

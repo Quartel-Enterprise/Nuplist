@@ -9,7 +9,6 @@ fun main() = application {
     initializeKoin()
     Window(
         onCloseRequest = ::exitApplication,
-        alwaysOnTop = true,
         title = "Nuplist",
     ) {
         App()

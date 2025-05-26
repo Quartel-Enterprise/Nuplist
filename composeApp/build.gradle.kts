@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.androidx.core.splashscreen)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
 
@@ -58,6 +59,7 @@ kotlin {
 
             // Coil
             implementation(libs.coil.compose)
+            implementation(libs.coil.network)
 
             // AndroidX
             implementation(libs.androidx.lifecycle.viewmodel)
@@ -92,6 +94,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.ktor.client.java)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

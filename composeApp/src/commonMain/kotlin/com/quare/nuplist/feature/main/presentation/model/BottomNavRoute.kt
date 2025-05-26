@@ -2,14 +2,14 @@ package com.quare.nuplist.feature.main.presentation.model
 
 import kotlinx.serialization.Serializable
 
-sealed interface MainNavRoute {
+sealed interface BottomNavRoute {
 
     @Serializable
-    data object Home: MainNavRoute
+    data object Home : BottomNavRoute
 
     @Serializable
-    data object GuessList: MainNavRoute
+    data object GuessList : BottomNavRoute
 
     @Serializable
-    data object Settings: MainNavRoute
+    data object Settings : BottomNavRoute
 }
