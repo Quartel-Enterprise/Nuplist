@@ -1,9 +1,7 @@
 package com.quare.nuplist.feature.main.presentation.screen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -12,13 +10,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
+import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
 import com.quare.nuplist.feature.main.presentation.screen.component.MainAppBarComponent
 import nuplist.composeapp.generated.resources.Res
@@ -31,14 +29,15 @@ fun MainScreenContent(
     currentDestination: NavDestination?,
     bottomNavigationModels: List<BottomNavigationItemModel<Any>>,
     onEvent: (MainScreenUiEvent) -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     NavigationSuiteScaffold(
         navigationSuiteItems = {
             bottomNavigationModels.forEach { bottomNavigationItemModel: BottomNavigationItemModel<Any> ->
                 val presentationItem = bottomNavigationItemModel.presentationModel
+                val isSelected = isSelected(currentDestination, bottomNavigationItemModel)
                 item(
-                    selected = isSelected(currentDestination, bottomNavigationItemModel),
+                    selected = isSelected,
                     onClick = {
                         onEvent(
                             MainScreenUiEvent.BottomNavItemClicked(
@@ -60,6 +59,7 @@ fun MainScreenContent(
         },
         content = {
             Scaffold(
+                modifier = Modifier.fillMaxSize(),
                 topBar = {
                     MainAppBarComponent(
                         userPhoto = userModel.photo,
@@ -81,17 +81,8 @@ fun MainScreenContent(
                         text = { Text(text) },
                     )
                 },
-                modifier = Modifier.fillMaxSize()
-            ) { paddingValues: PaddingValues ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    content()
-                }
-            }
+                content = content,
+            )
         },
     )
 }
@@ -100,5 +91,7 @@ private fun isSelected(
     currentDestination: NavDestination?,
     bottomNavigationItemModel: BottomNavigationItemModel<Any>,
 ): Boolean = currentDestination?.hierarchy?.any { navDestination: NavDestination ->
-    navDestination.hasRoute(bottomNavigationItemModel.route::class)
+    (bottomNavigationItemModel.route as? BottomNavRoute)?.let { route ->
+        navDestination.hasRoute(route::class)
+    } ?: false
 } ?: false

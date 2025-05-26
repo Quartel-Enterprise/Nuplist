@@ -1,6 +1,5 @@
 package com.quare.nuplist.ui.dialog.profile.component
 
-import com.quare.nuplist.ui.picture.UserProfilePicture
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,11 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.quare.nuplist.ui.dialog.profile.model.ProfileDialogState
+import com.quare.nuplist.core.user.domain.model.UserModel
+import com.quare.nuplist.ui.picture.UserProfilePicture
 
 @Composable
 fun UserPictureNameAndEmail(
-    user: ProfileDialogState,
+    user: UserModel,
     modifier: Modifier = Modifier,
 ) {
     user.run {
@@ -25,16 +25,16 @@ fun UserPictureNameAndEmail(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             UserProfilePicture(
-                photoUrl = userPicture,
+                photoUrl = photo,
                 size = 40.dp
             )
             Column {
                 Text(
-                    text = userName,
+                    text = name,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                 )
-                userEmail?.let {
+                email?.let {
                     Text(
                         text = it,
                         fontSize = 14.sp,

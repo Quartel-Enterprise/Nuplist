@@ -1,17 +1,23 @@
 package com.quare.nuplist.feature.main.presentation.navhost
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.quare.nuplist.feature.guess_list.GuessListScreen
 import com.quare.nuplist.feature.home.HomeScreen
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
-import com.quare.nuplist.feature.settings.presentation.SettingsScreen
 
 @Composable
-fun BottomNavHost(navController: NavHostController) {
+fun BottomNavHost(paddingValues: PaddingValues, navController: NavHostController) {
     NavHost(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues),
         navController = navController,
         startDestination = BottomNavRoute.Home,
     ) {
@@ -21,10 +27,6 @@ fun BottomNavHost(navController: NavHostController) {
 
         composable<BottomNavRoute.GuessList> {
             GuessListScreen()
-        }
-
-        composable<BottomNavRoute.Settings> {
-            SettingsScreen()
         }
     }
 }

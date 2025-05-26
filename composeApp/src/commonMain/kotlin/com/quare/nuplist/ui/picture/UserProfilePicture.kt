@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
 import com.quare.nuplist.ui.utils.onNullableClick
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.profile_icon
@@ -42,7 +41,6 @@ fun UserProfilePicture(
         val photoUrlModifier = modifier
             .clip(shape)
             .size(size)
-        Logger.d(tag = "UserProfilePicture", messageString = photoUrl.toString())
         Picture(
             modifier = photoUrlModifier,
             url = photoUrl,

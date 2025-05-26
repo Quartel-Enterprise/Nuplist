@@ -7,17 +7,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.ui.dialog.profile.component.DialogProfileHeader
 import com.quare.nuplist.ui.dialog.profile.component.LogoutOption
 import com.quare.nuplist.ui.dialog.profile.component.UserPictureNameAndEmail
 import com.quare.nuplist.ui.dialog.profile.component.link.LinksRow
-import com.quare.nuplist.ui.dialog.profile.model.ProfileDialogState
+import com.quare.nuplist.ui.dialog.profile.model.LogoutModel
 import com.quare.nuplist.ui.dialog.profile.model.ProfileDialogUiEvent
 import com.quare.nuplist.ui.spacer.VerticalSpacer
 import com.quare.nuplist.ui.theme_selector.presentation.ThemeSelector
@@ -25,9 +27,10 @@ import com.quare.nuplist.ui.theme_selector.presentation.ThemeSelector
 @Composable
 fun ProfileDialogContent(
     currentTheme: ThemeOption,
-    state: ProfileDialogState?,
+    logoutModel: LogoutModel?,
+    showPrivacyPolicyLinks: Boolean,
+    userModel: UserModel?,
     onDismiss: () -> Unit,
-    onLogout: (() -> Unit)?,
     onEvent: (ProfileDialogUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -49,10 +52,10 @@ fun ProfileDialogContent(
         ) {
             DialogProfileHeader(onDismiss)
             VerticalSpacer(24)
-            state?.let {
+            userModel?.let {
                 UserPictureNameAndEmail(
                     modifier = Modifier.fillMaxWidth(),
-                    user = state
+                    user = userModel
                 )
             }
             VerticalSpacer(24)
@@ -63,17 +66,25 @@ fun ProfileDialogContent(
                 }
             )
             VerticalSpacer(24)
-            onLogout?.let {
-                LogoutOption(onLogout = it)
+            logoutModel?.let {
+                if (it.isLoading) {
+                    CircularProgressIndicator()
+                } else {
+                    LogoutOption(onLogout = it.onClick)
+                }
             }
-            VerticalSpacer(4)
-            Box(modifier = Modifier.fillMaxWidth()) {
-                LinksRow(
-                    modifier = Modifier.align(Alignment.Center),
-                    goToLink = {
-                        onEvent(ProfileDialogUiEvent.LinkClick(it))
-                    }
-                )
+            if (showPrivacyPolicyLinks) {
+                VerticalSpacer(4)
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    LinksRow(
+                        modifier = Modifier.align(Alignment.Center),
+                        goToLink = {
+                            onEvent(ProfileDialogUiEvent.LinkClick(it))
+                        }
+                    )
+                }
+            } else {
+                VerticalSpacer(24)
             }
         }
     }

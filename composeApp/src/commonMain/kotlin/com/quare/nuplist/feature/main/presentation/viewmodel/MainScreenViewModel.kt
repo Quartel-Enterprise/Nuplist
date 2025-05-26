@@ -3,40 +3,69 @@ package com.quare.nuplist.feature.main.presentation.viewmodel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.feature.main.domain.MainScreenUiAction
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
-import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
+import com.quare.nuplist.feature.main.domain.state.MainScreenUiState
+import com.quare.nuplist.feature.main.domain.state.ProfileDialogUiState
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
+import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
+import io.github.jan.supabase.SupabaseClient
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nuplist.composeapp.generated.resources.Res
-import nuplist.composeapp.generated.resources.guest_list
+import nuplist.composeapp.generated.resources.guests
 import nuplist.composeapp.generated.resources.home
-import nuplist.composeapp.generated.resources.settings
 
-class MainScreenViewModel : ViewModel() {
+class MainScreenViewModel(
+    private val supabaseClient: SupabaseClient,
+) : ViewModel() {
+
+    private val _state: MutableStateFlow<MainScreenUiState> = MutableStateFlow(
+        MainScreenUiState(null)
+    )
+    val state: StateFlow<MainScreenUiState> = _state
 
     private val routes: List<BottomNavRoute> = listOf(
         BottomNavRoute.Home,
         BottomNavRoute.GuessList,
-        BottomNavRoute.Settings,
     )
 
     private val _uiAction: MutableSharedFlow<MainScreenUiAction> = MutableSharedFlow()
     val uiAction: SharedFlow<MainScreenUiAction> = _uiAction
 
-    val bottomNavigationItemModels: List<BottomNavigationItemModel<Any>> = routes.map { it.toBottomNavHost() }
+    val bottomNavigationItemModels: List<BottomNavigationItemModel<Any>> =
+        routes.map { it.toBottomNavHost() }
 
     fun dispatchUiEvent(event: MainScreenUiEvent) {
         when (event) {
-            MainScreenUiEvent.ProfilePictureClicked -> Unit
+            MainScreenUiEvent.ProfilePictureClicked -> changeProfileDialogState(
+                ProfileDialogUiState(
+                    isExitButtonLoading = false
+                )
+            )
+
             MainScreenUiEvent.AddGuestClicked -> emitAction(MainScreenUiAction.NavigateToAddGuest)
-            is MainScreenUiEvent.BottomNavItemClicked -> emitAction(MainScreenUiAction.NavigateToBottomRoute(event.route))
+            is MainScreenUiEvent.BottomNavItemClicked -> emitAction(
+                MainScreenUiAction.NavigateToBottomRoute(
+                    event.route
+                )
+            )
+
+            MainScreenUiEvent.LogoutClick -> viewModelScope.launch {
+                changeIsExitLoading(true)
+                supabaseClient.auth.signOut()
+                changeIsExitLoading(false)
+            }
+
+            MainScreenUiEvent.DismissDialog -> changeProfileDialogState(null)
         }
     }
 
@@ -46,23 +75,33 @@ class MainScreenViewModel : ViewModel() {
         }
     }
 
-    private fun BottomNavRoute.toBottomNavHost(): BottomNavigationItemModel<Any> = BottomNavigationItemModel(
-        route = this,
-        presentationModel = when (this) {
-            BottomNavRoute.Home -> BottomNavigationItemPresentationModel(
-                title = Res.string.home,
-                icon = Icons.Default.Home,
-            )
+    private fun BottomNavRoute.toBottomNavHost(): BottomNavigationItemModel<Any> =
+        BottomNavigationItemModel(
+            route = this,
+            presentationModel = when (this) {
+                BottomNavRoute.Home -> BottomNavigationItemPresentationModel(
+                    title = Res.string.home,
+                    icon = Icons.Default.Home,
+                )
 
-            BottomNavRoute.GuessList -> BottomNavigationItemPresentationModel(
-                title = Res.string.guest_list,
-                icon = Icons.AutoMirrored.Default.List,
-            )
+                BottomNavRoute.GuessList -> BottomNavigationItemPresentationModel(
+                    title = Res.string.guests,
+                    icon = Icons.AutoMirrored.Default.List,
+                )
+            }
+        )
 
-            BottomNavRoute.Settings -> BottomNavigationItemPresentationModel(
-                title = Res.string.settings,
-                icon = Icons.Default.Settings
+    private fun changeProfileDialogState(profileDialogUiState: ProfileDialogUiState?) {
+        _state.update { it.copy(profileDialogUiState = profileDialogUiState) }
+    }
+
+    private fun changeIsExitLoading(isLoading: Boolean) {
+        _state.update {
+            it.copy(
+                profileDialogUiState = it.profileDialogUiState?.copy(
+                    isExitButtonLoading = isLoading
+                )
             )
         }
-    )
+    }
 }

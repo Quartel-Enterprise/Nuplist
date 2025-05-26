@@ -18,6 +18,7 @@ class SessionUserMapper {
             photo = sessionUserMetadataDto.photo ?: return@let null,
             name = sessionUserMetadataDto.name,
             id = sessionUser.id,
+            email = sessionUser.email,
         )
     }
 }

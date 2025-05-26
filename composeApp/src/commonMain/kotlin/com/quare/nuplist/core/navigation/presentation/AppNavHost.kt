@@ -25,7 +25,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun AppNavHost(userModel: UserModel) {
     val appNavController: NavHostController = rememberNavController()
     val bottomNavController: NavHostController = rememberNavController()
-    val navBackStackEntry by appNavController.currentBackStackEntryAsState()
+    val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
     CompositionLocalProvider(LocalBack provides appNavController.getMapOfNavigationBack()) {
         NavHost(
             navController = appNavController,
@@ -42,7 +42,10 @@ fun AppNavHost(userModel: UserModel) {
                         appNavController.navigate(NavRoute.AddGuest)
                     },
                     bottomNavHost = {
-                        BottomNavHost(bottomNavController)
+                        BottomNavHost(
+                            paddingValues = it,
+                            navController = bottomNavController
+                        )
                     }
                 )
             }
@@ -67,7 +70,7 @@ private fun NavHostController.goToBottomNavRoute(route: Any) {
     }
 }
 
-fun NavController.getMapOfNavigationBack(): BackNavigationMap = mapOf(
+private fun NavController.getMapOfNavigationBack(): BackNavigationMap = mapOf(
     BackNavigationType.NORMAL to { popBackStack() },
     BackNavigationType.NONE to {}
 )

@@ -9,7 +9,4 @@ sealed interface BottomNavRoute {
 
     @Serializable
     data object GuessList : BottomNavRoute
-
-    @Serializable
-    data object Settings : BottomNavRoute
 }

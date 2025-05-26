@@ -15,12 +15,6 @@ import kotlinx.coroutines.launch
 
 class ProfileDialogViewModel: ViewModel() {
 
-    private val _state: MutableStateFlow<ProfileDialogState?> = MutableStateFlow(
-        null
-    )
-
-    val state: StateFlow<ProfileDialogState?> = _state
-
     private val _uiAction: MutableSharedFlow<ProfileDialogUiAction> = MutableSharedFlow()
     val uiAction: SharedFlow<ProfileDialogUiAction> = _uiAction
 
