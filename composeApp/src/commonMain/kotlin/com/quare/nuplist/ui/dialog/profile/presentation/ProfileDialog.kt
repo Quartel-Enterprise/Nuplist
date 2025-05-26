@@ -6,8 +6,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.quare.nuplist.core.theme.LocalThemeChanged
-import com.quare.nuplist.core.theme.LocalThemeOption
+import com.quare.nuplist.core.option.LocalLanguageOption
+import com.quare.nuplist.core.option.LocalOptionChange
+import com.quare.nuplist.core.option.LocalThemeOption
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.core.utils.ActionCollector
 import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
@@ -25,14 +26,14 @@ fun ProfileDialog(
     viewModel: ProfileDialogViewModel = koinViewModel(),
 ) {
     val uriHandler = LocalUriHandler.current
-    val localThemeChanged = LocalThemeChanged.current
+    val localOptionChange = LocalOptionChange.current
 
     ActionCollector(
         flow = viewModel.uiAction,
         emit = { action ->
             when (action) {
                 is ProfileDialogUiAction.OpenUri -> uriHandler.openUri(action.uri)
-                is ProfileDialogUiAction.ChangeTheme -> localThemeChanged(action.theme)
+                is ProfileDialogUiAction.ChangeOption -> localOptionChange(action.option)
             }
         }
     )
@@ -49,6 +50,7 @@ fun ProfileDialog(
             currentTheme = LocalThemeOption.current,
             logoutModel = logoutModel,
             showPrivacyPolicyLinks = showPrivacyPolicyLinks,
+            currentLanguage = LocalLanguageOption.current,
         )
     }
 }

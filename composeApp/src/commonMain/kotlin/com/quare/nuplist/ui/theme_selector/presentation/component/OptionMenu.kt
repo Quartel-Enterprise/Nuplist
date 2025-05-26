@@ -9,12 +9,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.option.SelectableOption
 
 @Composable
-fun ThemeMenu(
-    currentTheme: ThemeOption,
-    onThemeSelected: (ThemeOption) -> Unit,
+fun OptionMenu(
+    options: List<SelectableOption>,
+    currentOption: SelectableOption,
+    onOptionSelected: (SelectableOption) -> Unit,
     startSpacing: Int = 0,
     modifier: Modifier = Modifier,
 ) {
@@ -22,15 +23,15 @@ fun ThemeMenu(
         modifier
             .background(color = MaterialTheme.colorScheme.surface)
     ) {
-        ThemeOption.entries.forEach { themeOption ->
-            ThemeMenuItem(
+        options.forEach { option ->
+            OptionMenuItem(
                 startSpacing = startSpacing,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
-                    .clickable { onThemeSelected(themeOption) },
-                themeOption = themeOption,
-                isSelected = themeOption == currentTheme
+                    .clickable { onOptionSelected(option) },
+                option = option,
+                isSelected = option == currentOption
             )
         }
     }

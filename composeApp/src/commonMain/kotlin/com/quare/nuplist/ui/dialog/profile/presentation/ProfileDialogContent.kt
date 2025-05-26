@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.ui.dialog.profile.presentation.component.DialogProfileHeader
 import com.quare.nuplist.ui.dialog.profile.presentation.component.LogoutOption
@@ -26,7 +26,8 @@ import com.quare.nuplist.ui.theme_selector.presentation.Selector
 
 @Composable
 fun ProfileDialogContent(
-    currentTheme: ThemeOption,
+    currentTheme: SelectableOption.Theme,
+    currentLanguage: SelectableOption.Language,
     logoutModel: LogoutModel?,
     showPrivacyPolicyLinks: Boolean,
     userModel: UserModel?,
@@ -59,11 +60,11 @@ fun ProfileDialogContent(
                 )
             }
             VerticalSpacer(24)
-            Selector(
+            CardSelectors(
+                modifier = Modifier.fillMaxWidth(),
                 currentTheme = currentTheme,
-                onThemeChange = {
-                    onEvent(ProfileDialogUiEvent.SelectTheme(it))
-                }
+                onEvent = onEvent,
+                currentLanguage = currentLanguage
             )
             VerticalSpacer(24)
             logoutModel?.let {
@@ -86,6 +87,40 @@ fun ProfileDialogContent(
             } else {
                 VerticalSpacer(24)
             }
+        }
+    }
+}
+
+@Composable
+private fun CardSelectors(
+    modifier: Modifier = Modifier,
+    currentTheme: SelectableOption.Theme,
+    onEvent: (ProfileDialogUiEvent) -> Unit,
+    currentLanguage: SelectableOption.Language,
+) {
+    Card(modifier = modifier) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Selector(
+                options = listOf(
+                    SelectableOption.Theme.Light,
+                    SelectableOption.Theme.Dark,
+                    SelectableOption.Theme.System,
+                ),
+                currentOption = currentTheme,
+                onOptionChange = {
+                    onEvent(ProfileDialogUiEvent.SelectOption(it))
+                }
+            )
+            Selector(
+                options = listOf(
+                    SelectableOption.Language.English,
+                    SelectableOption.Language.PortugueseBrazil,
+                ),
+                currentOption = currentLanguage,
+                onOptionChange = {
+                    onEvent(ProfileDialogUiEvent.SelectOption(it))
+                }
+            )
         }
     }
 }

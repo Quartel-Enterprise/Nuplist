@@ -4,8 +4,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import com.quare.nuplist.core.option.LocalThemeOption
 import com.quare.nuplist.core.theme.color.darkScheme
 import com.quare.nuplist.core.theme.color.lightScheme
+import com.quare.nuplist.core.option.SelectableOption
 
 @Composable
 fun AppTheme(
@@ -21,9 +23,9 @@ fun AppTheme(
 
 @Composable
 fun isAppInDarkTheme(): Boolean = when (LocalThemeOption.current) {
-    ThemeOption.LIGHT -> false
-    ThemeOption.DARK -> true
-    ThemeOption.SYSTEM -> isSystemInDarkTheme()
+    SelectableOption.Theme.Dark -> true
+    SelectableOption.Theme.Light -> false
+    SelectableOption.Theme.System -> isSystemInDarkTheme()
 }
 
 @Composable

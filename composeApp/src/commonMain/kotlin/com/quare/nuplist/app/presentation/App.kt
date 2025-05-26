@@ -8,12 +8,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.quare.nuplist.core.internationalization.presentation.InitializeLanguage
 import com.quare.nuplist.core.navigation.RootAppNavHost
+import com.quare.nuplist.core.option.LocalOptionChange
+import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.core.theme.AppTheme
-import com.quare.nuplist.core.theme.LocalThemeChanged
-import com.quare.nuplist.core.theme.LocalThemeOption
-import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.option.LocalThemeOption
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -21,11 +20,11 @@ fun App(
     getSpecificColors: @Composable ((isAppInDarkTheme: Boolean) -> ColorScheme?)? = null
 ) {
     val viewModel: AppViewModel = koinViewModel()
-    val themeOption by viewModel.themeOption.collectAsState()
-    themeOption?.let { safeThemeOption ->
+    val selectableOptions by viewModel.selectableOptions.collectAsState()
+    selectableOptions?.let { safeOptions ->
         ProvideCompositionLocals(
-            themeOption = safeThemeOption,
-            onThemeChanged = viewModel::onThemeChange,
+            themeOption = safeOptions.theme,
+            onOptionChange = viewModel::onOptionChange,
         ) {
             AppTheme(getSpecificColors) {
 //                InitializeLanguage()
@@ -41,13 +40,13 @@ fun App(
 
 @Composable
 private fun ProvideCompositionLocals(
-    themeOption: ThemeOption,
-    onThemeChanged: (ThemeOption) -> Unit,
+    themeOption: SelectableOption.Theme,
+    onOptionChange: (SelectableOption) -> Unit,
     content: @Composable () -> Unit,
 ) {
     CompositionLocalProvider(
         LocalThemeOption provides themeOption,
-        LocalThemeChanged provides onThemeChanged,
+        LocalOptionChange provides onOptionChange,
     ) {
         content()
     }

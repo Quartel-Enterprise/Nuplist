@@ -1,6 +1,7 @@
 package com.quare.nuplist.core.config
 
 import com.quare.nuplist.BuildKonfig
+import com.quare.nuplist.app.domain.GetLanguageOptionUseCase
 import com.quare.nuplist.app.domain.GetThemeOptionUseCase
 import com.quare.nuplist.app.presentation.AppViewModel
 import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialogViewModel
@@ -39,6 +40,9 @@ val configModule = module {
     }
     factory {
         GetThemeOptionUseCase()
+    }
+    factory {
+        GetLanguageOptionUseCase()
     }
     viewModelOf(::AppViewModel)
     viewModelOf(::ProfileDialogViewModel)

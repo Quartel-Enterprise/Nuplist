@@ -6,37 +6,40 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.quare.nuplist.core.theme.ThemeOption
-import com.quare.nuplist.ui.theme_selector.domain.ThemeSelectorUiEvent
-import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.ThemeSelectorViewModel
-import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.themeSelectorViewModel
+import com.quare.nuplist.core.option.SelectableOption
+import com.quare.nuplist.ui.theme_selector.domain.SelectorUiEvent
+import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.OptionSelectorViewModel
+import com.quare.nuplist.ui.theme_selector.presentation.viewmodel.optionSelectorViewModel
 
 @Composable
 fun Selector(
-    currentTheme: ThemeOption,
-    onThemeChange: (ThemeOption) -> Unit,
+    options: List<SelectableOption>,
+    currentOption: SelectableOption,
+    onOptionChange: (SelectableOption) -> Unit,
     modifier: Modifier = Modifier,
-    viewmodel: ThemeSelectorViewModel = themeSelectorViewModel(
-        themeSelected = currentTheme,
-        onThemeChange = onThemeChange,
+    viewmodel: OptionSelectorViewModel = optionSelectorViewModel(
+        optionSelected = currentOption,
+        onOptionChange = onOptionChange,
     ),
 ) {
     val onEvent = viewmodel::dispatchUiEvent
     val state by viewmodel.state.collectAsState()
 
-    LaunchedEffect(currentTheme) {
-        onEvent(ThemeSelectorUiEvent.SelectTheme(currentTheme))
+    LaunchedEffect(currentOption) {
+        onEvent(SelectorUiEvent.Select(currentOption))
     }
 
-    ThemeSelectorContent(
+    SelectorContent(
         modifier = modifier,
+        options = options,
+        state = state,
         onEvent = onEvent,
-        state = state
+        selectedOption = currentOption,
     )
 
     DisposableEffect(Unit) {
         onDispose {
-            onEvent(ThemeSelectorUiEvent.CloseMenu)
+            onEvent(SelectorUiEvent.CloseMenu)
         }
     }
 }

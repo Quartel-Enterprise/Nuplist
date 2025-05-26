@@ -5,26 +5,23 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.quare.nuplist.core.theme.ThemeOption
 import com.quare.nuplist.ui.spacer.HorizontalSpacer
-import com.quare.nuplist.ui.theme_selector.presentation.toIcon
-import com.quare.nuplist.ui.theme_selector.presentation.toName
+import com.quare.nuplist.core.option.SelectableOption
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun ThemeMenuItem(
-    themeOption: ThemeOption,
+fun OptionMenuItem(
+    option: SelectableOption,
     isSelected: Boolean,
     startSpacing: Int = 0,
     modifier: Modifier = Modifier,
 ) {
-        val displayName = stringResource(themeOption.toName())
+        val displayName = stringResource(option.name)
         Row(
             modifier = modifier,
             verticalAlignment = Alignment.CenterVertically
@@ -39,21 +36,14 @@ fun ThemeMenuItem(
                     Color.Transparent
                 }
             )
-            HorizontalSpacer(16)
-            Icon(
-                imageVector = themeOption.toIcon(),
-                contentDescription = displayName
-            )
+            option.icon?.let {
+                HorizontalSpacer(16)
+                Icon(
+                    imageVector = it,
+                    contentDescription = displayName
+                )
+            }
             HorizontalSpacer(16)
             Text(text = displayName)
         }
-}
-
-@Composable
-private fun getSurfaceColor(isSelected: Boolean): Color {
-    return if (isSelected) {
-        MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
-    } else {
-        MaterialTheme.colorScheme.surfaceVariant
-    }
 }

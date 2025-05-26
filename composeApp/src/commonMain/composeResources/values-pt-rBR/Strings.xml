@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Nuplist</string>
     <string name="home">Início</string>
-    <string name="guest_list">Lista</string>
+    <string name="guests">Convidados</string>
     <string name="settings">Configurações</string>
     <string name="login_headline">Todos os convidados do seu casamento em um só lugar</string>
     <string name="google_login_text">Entrar com Google</string>
@@ -15,9 +15,12 @@
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="terms_of_service">Termos de Serviço</string>
     <string name="theme">Tema</string>
+    <string name="language">Idioma</string>
     <string name="light">Claro</string>
     <string name="dark">Escuro</string>
     <string name="system">Sistema</string>
     <string name="add_guest">Adicionar convidado</string>
     <string name="back">Voltar</string>
+    <string name="english">Inglês</string>
+    <string name="portuguese_brazil">Português Brasil</string>
 </resources>

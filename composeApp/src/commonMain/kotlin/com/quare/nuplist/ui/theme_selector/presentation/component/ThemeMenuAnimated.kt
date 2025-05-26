@@ -9,27 +9,29 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.quare.nuplist.core.theme.ThemeOption
-import com.quare.nuplist.ui.theme_selector.domain.ThemeSelectorUiState
+import com.quare.nuplist.core.option.SelectableOption
+import com.quare.nuplist.ui.theme_selector.domain.SelectorUiState
 
 private const val ANIMATION_DURATION_MILLIS = 300
 
 @Composable
-fun ThemeMenuAnimated(
-    state: ThemeSelectorUiState,
-    onThemeSelected: (ThemeOption) -> Unit
+fun MenuAnimated(
+    state: SelectorUiState,
+    options: List<SelectableOption>,
+    onOptionSelected: (SelectableOption) -> Unit
 ) {
     AnimatedVisibility(
         visible = state.isMenuExpanded,
         enter = expandVertically(animationSpec = tween(ANIMATION_DURATION_MILLIS)) + fadeIn(),
         exit = shrinkVertically(animationSpec = tween(ANIMATION_DURATION_MILLIS)) + fadeOut()
     ) {
-        ThemeMenu(
+        OptionMenu(
             modifier = Modifier
                 .fillMaxWidth(),
-            currentTheme = state.themeSelected,
-            onThemeSelected = onThemeSelected,
-            startSpacing = 16
+            currentOption = state.optionSelected,
+            onOptionSelected = onOptionSelected,
+            startSpacing = 16,
+            options = options,
         )
     }
 }

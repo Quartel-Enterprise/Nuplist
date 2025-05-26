@@ -4,18 +4,19 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.option.SelectableOption
 
 @Composable
-fun themeSelectorViewModel(
-    themeSelected: ThemeOption,
-    onThemeChange: (ThemeOption) -> Unit,
-): ThemeSelectorViewModel = viewModel(
+fun optionSelectorViewModel(
+    optionSelected: SelectableOption,
+    onOptionChange: (SelectableOption) -> Unit,
+): OptionSelectorViewModel = viewModel(
+    key = optionSelected.key,
     factory = viewModelFactory {
         initializer {
-            ThemeSelectorViewModel(
-                themeSelected = themeSelected,
-                onThemeChange = onThemeChange
+            OptionSelectorViewModel(
+                optionSelected = optionSelected,
+                onOptionSelected = onOptionChange
             )
         }
     }

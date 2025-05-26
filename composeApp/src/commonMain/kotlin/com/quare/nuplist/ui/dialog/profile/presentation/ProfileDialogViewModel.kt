@@ -3,7 +3,7 @@ package com.quare.nuplist.ui.dialog.profile.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.core.internationalization.domain.Language
-import com.quare.nuplist.core.theme.ThemeOption
+import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.ui.dialog.profile.presentation.model.ProfileDialogUiAction
 import com.quare.nuplist.ui.dialog.profile.presentation.model.ProfileDialogUiEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,15 +17,15 @@ class ProfileDialogViewModel: ViewModel() {
 
     fun dispatchUiEvent(uiEvent: ProfileDialogUiEvent) {
         when (uiEvent) {
-            is ProfileDialogUiEvent.SelectTheme -> setThemeOption(uiEvent.theme)
-            is ProfileDialogUiEvent.SelectLanguage -> TODO()
+            is ProfileDialogUiEvent.LinkClick -> TODO()
+            is ProfileDialogUiEvent.SelectOption -> setOption(uiEvent.option)
         }
     }
 
-    private fun setThemeOption(theme: ThemeOption) {
+    private fun setOption(option: SelectableOption) {
         viewModelScope.launch {
 //            useCases.setThemeOption(theme)
-            _uiAction.emit(ProfileDialogUiAction.ChangeTheme(theme))
+            _uiAction.emit(ProfileDialogUiAction.ChangeOption(option))
         }
     }
 
