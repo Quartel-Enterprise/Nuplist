@@ -13,9 +13,13 @@ import com.quare.nuplist.feature.home.HomeScreen
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 
 @Composable
-fun BottomNavHost(paddingValues: PaddingValues, navController: NavHostController) {
+fun BottomNavHost(
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+) {
     NavHost(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(paddingValues),
         navController = navController,

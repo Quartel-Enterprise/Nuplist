@@ -15,7 +15,9 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             enableEdgeToEdge()
-            App { getAndroidSpecificColorScheme(it) }
+            App(
+                getSpecificColors = { getAndroidSpecificColorScheme(it) }
+            )
         }
     }
 }

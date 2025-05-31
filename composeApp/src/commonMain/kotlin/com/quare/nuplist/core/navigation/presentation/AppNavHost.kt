@@ -3,6 +3,7 @@ package com.quare.nuplist.core.navigation.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -22,12 +23,13 @@ import com.quare.nuplist.ui.utils.back.LocalBack
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AppNavHost(userModel: UserModel) {
+fun AppNavHost(userModel: UserModel, getNavigationModifier: (onBack: () -> Unit) -> Modifier) {
     val appNavController: NavHostController = rememberNavController()
     val bottomNavController: NavHostController = rememberNavController()
     val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
     CompositionLocalProvider(LocalBack provides appNavController.getMapOfNavigationBack()) {
         NavHost(
+            modifier = getNavigationModifier(appNavController::navigateUp),
             navController = appNavController,
             startDestination = NavRoute.Main,
         ) {
@@ -43,6 +45,7 @@ fun AppNavHost(userModel: UserModel) {
                     },
                     bottomNavHost = {
                         BottomNavHost(
+                            modifier = getNavigationModifier(bottomNavController::navigateUp),
                             paddingValues = it,
                             navController = bottomNavController
                         )
@@ -71,6 +74,6 @@ private fun NavHostController.goToBottomNavRoute(route: Any) {
 }
 
 private fun NavController.getMapOfNavigationBack(): BackNavigationMap = mapOf(
-    BackNavigationType.NORMAL to { popBackStack() },
+    BackNavigationType.NORMAL to { navigateUp() },
     BackNavigationType.NONE to {}
 )

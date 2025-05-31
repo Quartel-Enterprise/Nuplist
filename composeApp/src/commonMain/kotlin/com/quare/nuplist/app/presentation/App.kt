@@ -17,6 +17,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun App(
+    getNavigationModifier: (onBack: () -> Unit) -> Modifier = { Modifier },
     getSpecificColors: @Composable ((isAppInDarkTheme: Boolean) -> ColorScheme?)? = null
 ) {
     val viewModel: AppViewModel = koinViewModel()
@@ -27,11 +28,10 @@ fun App(
             onOptionChange = viewModel::onOptionChange,
         ) {
             AppTheme(getSpecificColors) {
-//                InitializeLanguage()
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    RootAppNavHost()
+                    RootAppNavHost(getNavigationModifier)
                 }
             }
         }
