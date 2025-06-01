@@ -2,13 +2,11 @@ package com.quare.nuplist.core.navigation.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.quare.nuplist.core.navigation.domain.NavRoute
 import com.quare.nuplist.core.navigation.presentation.graph.authNavGraph
@@ -24,8 +22,6 @@ import org.koin.compose.viewmodel.koinViewModel
 fun RootAppNavHost(getNavigationModifier: (onBack: () -> Unit) -> Modifier) {
     val viewmodel: RootNavigationViewModel = koinViewModel()
     val appNavController: NavHostController = rememberNavController()
-    val bottomNavController: NavHostController = rememberNavController()
-    val bottomNavBackStackEntry by bottomNavController.currentBackStackEntryAsState()
     CollectAppNavActions(
         appNavController = appNavController,
         navigationActions = viewmodel.navigateChannel
@@ -39,8 +35,6 @@ fun RootAppNavHost(getNavigationModifier: (onBack: () -> Unit) -> Modifier) {
         ) {
             authNavGraph()
             mainNavGraph(
-                bottomNavBackStackEntry = bottomNavBackStackEntry,
-                bottomNavController = bottomNavController,
                 appNavController = appNavController,
                 getNavigationModifier = getNavigationModifier
             )

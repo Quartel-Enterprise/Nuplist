@@ -1,12 +1,15 @@
 package com.quare.nuplist.core.navigation.presentation.graph
 
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.quare.nuplist.core.navigation.domain.NavGraph
 import com.quare.nuplist.core.navigation.domain.NavRoute
@@ -20,8 +23,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.typeOf
 
 fun NavGraphBuilder.mainNavGraph(
-    bottomNavBackStackEntry: NavBackStackEntry?,
-    bottomNavController: NavHostController,
     appNavController: NavHostController,
     getNavigationModifier: (onBack: () -> Unit) -> Modifier,
 ) {
@@ -33,6 +34,8 @@ fun NavGraphBuilder.mainNavGraph(
                 typeOf<UserModel?>() to serializableType<UserModel?>()
             )
         ) { mainBackStackEntry: NavBackStackEntry ->
+            val bottomNavController: NavHostController = rememberNavController()
+            val bottomNavBackStackEntry by bottomNavController.currentBackStackEntryAsState()
             val arguments = mainBackStackEntry.toRoute<NavRoute.Main>()
             val mainViewModel: MainScreenViewModel = koinViewModel()
             MainScreen(
