@@ -2,6 +2,7 @@ package com.quare.nuplist.feature.login.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.quare.nuplist.core.utils.UiEventExecutor
+import com.quare.nuplist.feature.login.domain.model.LoginProvider
 import com.quare.nuplist.feature.login.domain.model.LoginUiState
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.compose.auth.ComposeAuth
@@ -15,7 +16,12 @@ class LoginViewModel(
 ) : ViewModel(), UiEventExecutor<LoginUiEvent> {
 
     val composeAuth: ComposeAuth = supabaseClient.composeAuth
-    private val _state: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState(false))
+    private val _state: MutableStateFlow<LoginUiState> = MutableStateFlow(
+        LoginUiState(
+            showSettingsDialog = false,
+            enabledProviders = listOf(LoginProvider.GOOGLE)
+        )
+    )
     val state: StateFlow<LoginUiState> = _state
 
     override fun dispatchUiEvent(uiEvent: LoginUiEvent) {

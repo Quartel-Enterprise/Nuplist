@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.quare.nuplist.feature.login.domain.model.LoginProvider
 import com.quare.nuplist.feature.login.presentation.component.FlowersImage
-import com.quare.nuplist.feature.login.presentation.component.button.signin.AppleSocialLoginButton
-import com.quare.nuplist.feature.login.presentation.component.button.signin.GoogleSocialLoginButton
+import com.quare.nuplist.feature.login.presentation.component.button.signin.EnableLoginProvidersComponent
 import com.quare.nuplist.feature.login.presentation.component.text.LoginHeadlineText
 import com.quare.nuplist.ui.spacer.HorizontalSpacer
 import com.quare.nuplist.ui.spacer.VerticalSpacer
@@ -24,6 +24,7 @@ import nuplist.composeapp.generated.resources.login_headline_second_line
 
 @Composable
 fun BoxWithConstraintsScope.LoginScreenLargeContent(
+    providers: List<LoginProvider>,
     onLoginWithGoogleClick: () -> Unit,
     onLoginWithAppleClick: () -> Unit,
 ) {
@@ -37,10 +38,13 @@ fun BoxWithConstraintsScope.LoginScreenLargeContent(
     ) {
         RightContent()
         HorizontalSpacer()
-        VerticalDivider(
-        )
+        VerticalDivider()
         HorizontalSpacer()
-        LeftContent(onLoginWithGoogleClick, onLoginWithAppleClick)
+        EnableLoginProvidersComponent(
+            providers = providers,
+            onLoginWithGoogleClick = onLoginWithGoogleClick,
+            onLoginWithAppleClick = onLoginWithAppleClick,
+        )
     }
 }
 
@@ -58,17 +62,5 @@ private fun RightContent() {
         )
         VerticalSpacer(24)
         FlowersImage()
-    }
-}
-
-@Composable
-private fun LeftContent(
-    onLoginWithGoogleClick: () -> Unit,
-    onLoginWithAppleClick: () -> Unit,
-) {
-    Column(verticalArrangement = Arrangement.Center) {
-        GoogleSocialLoginButton(onLoginWithGoogleClick)
-        VerticalSpacer(16)
-        AppleSocialLoginButton(onLoginWithAppleClick)
     }
 }

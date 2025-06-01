@@ -10,6 +10,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.quare.nuplist.feature.login.domain.model.LoginProvider
 import com.quare.nuplist.feature.login.presentation.component.button.SettingsIconButton
 import com.quare.nuplist.feature.login.presentation.screen.type.LoginScreenCompactContent
 import com.quare.nuplist.feature.login.presentation.screen.type.LoginScreenLargeContent
@@ -20,6 +21,7 @@ private const val LOGIN_SCREEN_WIDTH_BREAKPOINT = 700
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreenContent(
+    enableProviders: List<LoginProvider>,
     onEvent: (LoginUiEvent) -> Unit,
     onLoginWithGoogleClick: () -> Unit,
     onLoginWithAppleClick: () -> Unit,
@@ -46,11 +48,13 @@ fun LoginScreenContent(
         ) {
             if (maxWidth < LOGIN_SCREEN_WIDTH_BREAKPOINT.dp) {
                 LoginScreenCompactContent(
+                    providers = enableProviders,
                     onLoginWithGoogleClick = onLoginWithGoogleClick,
                     onLoginWithAppleClick = onLoginWithAppleClick,
                 )
             } else {
                 LoginScreenLargeContent(
+                    providers = enableProviders,
                     onLoginWithGoogleClick = onLoginWithGoogleClick,
                     onLoginWithAppleClick = onLoginWithAppleClick
                 )

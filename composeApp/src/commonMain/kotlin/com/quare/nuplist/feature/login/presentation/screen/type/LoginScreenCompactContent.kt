@@ -8,9 +8,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.quare.nuplist.feature.login.domain.model.LoginProvider
 import com.quare.nuplist.feature.login.presentation.component.FlowersImage
-import com.quare.nuplist.feature.login.presentation.component.button.signin.AppleSocialLoginButton
-import com.quare.nuplist.feature.login.presentation.component.button.signin.GoogleSocialLoginButton
+import com.quare.nuplist.feature.login.presentation.component.button.signin.EnableLoginProvidersComponent
 import com.quare.nuplist.feature.login.presentation.component.text.LoginHeadlineText
 import com.quare.nuplist.ui.spacer.VerticalSpacer
 import nuplist.composeapp.generated.resources.Res
@@ -18,6 +18,7 @@ import nuplist.composeapp.generated.resources.login_headline
 
 @Composable
 fun BoxWithConstraintsScope.LoginScreenCompactContent(
+    providers: List<LoginProvider>,
     modifier: Modifier = Modifier,
     onLoginWithGoogleClick: () -> Unit,
     onLoginWithAppleClick: () -> Unit,
@@ -36,8 +37,10 @@ fun BoxWithConstraintsScope.LoginScreenCompactContent(
         VerticalSpacer(48)
         FlowersImage()
         VerticalSpacer(48)
-        GoogleSocialLoginButton(onLoginWithGoogleClick)
-        VerticalSpacer(16)
-        AppleSocialLoginButton(onLoginWithAppleClick)
+        EnableLoginProvidersComponent(
+            providers = providers,
+            onLoginWithGoogleClick = onLoginWithGoogleClick,
+            onLoginWithAppleClick = onLoginWithAppleClick
+        )
     }
 }
