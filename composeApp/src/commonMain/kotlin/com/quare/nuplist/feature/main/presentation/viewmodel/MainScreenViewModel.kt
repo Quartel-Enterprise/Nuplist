@@ -11,8 +11,6 @@ import com.quare.nuplist.feature.main.domain.state.MainScreenUiState
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
-import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -22,9 +20,7 @@ import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.guests
 import nuplist.composeapp.generated.resources.home
 
-class MainScreenViewModel(
-    private val supabaseClient: SupabaseClient,
-) : ViewModel() {
+class MainScreenViewModel : ViewModel() {
 
     private val _state: MutableStateFlow<MainScreenUiState> = MutableStateFlow(
         MainScreenUiState(null)
@@ -52,11 +48,6 @@ class MainScreenViewModel(
                     event.route
                 )
             )
-
-            MainScreenUiEvent.LogoutClick -> viewModelScope.launch {
-                supabaseClient.auth.signOut()
-            }
-
         }
     }
 

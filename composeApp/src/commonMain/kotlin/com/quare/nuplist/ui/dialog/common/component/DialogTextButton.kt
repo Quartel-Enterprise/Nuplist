@@ -1,4 +1,4 @@
-package com.quare.nuplist.ui.dialog.common
+package com.quare.nuplist.ui.dialog.common.component
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton

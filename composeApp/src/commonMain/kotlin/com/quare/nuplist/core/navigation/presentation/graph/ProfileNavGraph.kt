@@ -10,10 +10,13 @@ import com.quare.nuplist.core.navigation.domain.NavGraph
 import com.quare.nuplist.core.navigation.domain.NavRoute
 import com.quare.nuplist.core.navigation.presentation.utils.serializableType
 import com.quare.nuplist.core.user.domain.model.UserModel
+import com.quare.nuplist.ui.dialog.logout.presentation.LogoutDialog
 import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialog
 import kotlin.reflect.typeOf
 
-fun NavGraphBuilder.profileNavGraph(navController: NavController) {
+fun NavGraphBuilder.profileNavGraph(
+    navController: NavController,
+) {
     navigation<NavGraph.Profile>(
         startDestination = NavRoute.Profile(null, false)
     ) {
@@ -23,10 +26,21 @@ fun NavGraphBuilder.profileNavGraph(navController: NavController) {
             )
         ) { backStackEntry: NavBackStackEntry ->
             val arguments = backStackEntry.toRoute<NavRoute.Profile>()
-            ProfileDialog(
-                userModel = arguments.userModel,
-                showLogout = arguments.showLogout,
-                onDismiss = navController::navigateUp,
+            navController.run {
+                ProfileDialog(
+                    onLogoutClick = {
+                        popBackStack()
+                        navigate(NavRoute.Logout)
+                    },
+                    userModel = arguments.userModel,
+                    shouldShowLogout = arguments.shouldShowLogout,
+                    onDismiss = ::navigateUp,
+                )
+            }
+        }
+        dialog<NavRoute.Logout> {
+            LogoutDialog(
+                onDismiss = navController::navigateUp
             )
         }
     }

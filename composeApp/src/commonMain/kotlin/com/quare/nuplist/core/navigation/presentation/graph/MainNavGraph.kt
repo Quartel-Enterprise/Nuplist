@@ -57,7 +57,7 @@ fun NavGraphBuilder.mainNavGraph(
                     appNavController.navigate(
                         NavRoute.Profile(
                             userModel = arguments.userModel,
-                            showLogout = true,
+                            shouldShowLogout = true,
                         )
                     )
                 }

@@ -18,7 +18,7 @@ fun NavGraphBuilder.authNavGraph(navController: NavController) {
                     navController.navigate(
                         NavRoute.Profile(
                             userModel = null,
-                            showLogout = false
+                            shouldShowLogout = false
                         )
                     )
                 }

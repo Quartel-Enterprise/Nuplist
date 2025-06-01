@@ -1,6 +1,7 @@
 package com.quare.nuplist.core.navigation.presentation.utils
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.quare.nuplist.core.navigation.domain.NavGraph
 import com.quare.nuplist.core.navigation.domain.NavRoute
@@ -16,16 +17,19 @@ fun CollectAppNavActions(
     appNavController.run {
         ActionCollector(navigationActions) { navigation ->
             when (navigation) {
-                is RootNavigation.Login -> {
-                    popBackStack()
-                    navigate(NavGraph.Authentication)
-                }
-
-                is RootNavigation.Main -> {
-                    popBackStack()
-                    navigate(NavRoute.Main(navigation.userModel))
-                }
+                is RootNavigation.Login -> navigateDroppingAll(NavGraph.Authentication)
+                is RootNavigation.Main -> navigateDroppingAll(NavRoute.Main(navigation.userModel))
             }
         }
+    }
+}
+
+private fun NavController.navigateDroppingAll(route: Any) {
+    navigate(route) {
+        popUpTo(0) {
+            inclusive = true
+        }
+        launchSingleTop = true
+        restoreState = false
     }
 }
