@@ -1,4 +1,4 @@
-package com.quare.nuplist.core.navigation.presentation
+package com.quare.nuplist.core.navigation.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

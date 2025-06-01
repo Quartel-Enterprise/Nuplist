@@ -12,7 +12,7 @@ sealed interface NavRoute {
     data object Login: NavRoute
 
     @Serializable
-    data class Main(val userModel: UserModel): NavRoute
+    data class Main(val userModel: UserModel?): NavRoute
 
     @Serializable
     data object AddGuest: NavRoute

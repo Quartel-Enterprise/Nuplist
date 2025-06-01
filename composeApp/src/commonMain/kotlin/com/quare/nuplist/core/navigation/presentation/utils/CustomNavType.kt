@@ -1,4 +1,4 @@
-package com.quare.nuplist.core.navigation.presentation
+package com.quare.nuplist.core.navigation.presentation.utils
 
 import androidx.navigation.NavType
 import androidx.savedstate.SavedState

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
+import co.touchlab.kermit.Logger
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
@@ -90,8 +91,13 @@ fun MainScreenContent(
 private fun isSelected(
     currentDestination: NavDestination?,
     bottomNavigationItemModel: BottomNavigationItemModel<Any>,
-): Boolean = currentDestination?.hierarchy?.any { navDestination: NavDestination ->
-    (bottomNavigationItemModel.route as? BottomNavRoute)?.let { route ->
-        navDestination.hasRoute(route::class)
-    } ?: false
-} ?: false
+): Boolean {
+    Logger.d(tag = "isSelected", messageString = "currentDestination: $currentDestination")
+    Logger.d(tag = "isSelected", messageString = "bottomNavigationItemModel: $bottomNavigationItemModel")
+    return currentDestination?.hierarchy
+        ?.any { navDestination: NavDestination ->
+            (bottomNavigationItemModel.route as? BottomNavRoute)?.let { route ->
+                navDestination.hasRoute(route::class)
+            } ?: false
+        } ?: false
+}

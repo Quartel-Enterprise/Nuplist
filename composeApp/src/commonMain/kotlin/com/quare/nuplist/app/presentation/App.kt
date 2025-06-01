@@ -9,7 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.quare.nuplist.core.navigation.RootAppNavHost
+import com.quare.nuplist.core.navigation.presentation.RootAppNavHost
 import com.quare.nuplist.core.option.LocalOptionChange
 import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.ui.theme.AppTheme
