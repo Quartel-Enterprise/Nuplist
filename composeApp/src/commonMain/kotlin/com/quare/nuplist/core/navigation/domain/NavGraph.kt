@@ -9,4 +9,7 @@ sealed interface NavGraph {
 
     @Serializable
     data object Authentication : NavGraph
+
+    @Serializable
+    data object Profile: NavGraph
 }

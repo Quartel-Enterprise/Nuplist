@@ -12,5 +12,4 @@ interface LoginUiEvent {
     }
 
     data object SettingsClick : LoginUiEvent
-    data object OnDismissModal : LoginUiEvent
 }

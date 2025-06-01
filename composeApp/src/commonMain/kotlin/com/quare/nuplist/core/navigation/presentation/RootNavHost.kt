@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.quare.nuplist.core.navigation.domain.NavRoute
 import com.quare.nuplist.core.navigation.presentation.graph.authNavGraph
 import com.quare.nuplist.core.navigation.presentation.graph.mainNavGraph
+import com.quare.nuplist.core.navigation.presentation.graph.profileNavGraph
 import com.quare.nuplist.core.navigation.presentation.utils.CollectAppNavActions
 import com.quare.nuplist.core.navigation.presentation.viewmodel.RootNavigationViewModel
 import com.quare.nuplist.ui.utils.back.BackNavigationMap
@@ -33,14 +34,13 @@ fun RootAppNavHost(getNavigationModifier: (onBack: () -> Unit) -> Modifier) {
             navController = appNavController,
             startDestination = NavRoute.Loading,
         ) {
-            authNavGraph()
+            authNavGraph(appNavController)
             mainNavGraph(
                 appNavController = appNavController,
                 getNavigationModifier = getNavigationModifier
             )
-            composable<NavRoute.Loading> {
-                // Loading screen content
-            }
+            profileNavGraph(appNavController)
+            composable<NavRoute.Loading> {}
         }
     }
 }

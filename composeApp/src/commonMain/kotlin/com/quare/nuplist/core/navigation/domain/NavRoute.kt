@@ -16,4 +16,7 @@ sealed interface NavRoute {
 
     @Serializable
     data object AddGuest: NavRoute
+
+    @Serializable
+    data class Profile(val userModel: UserModel?, val showLogout: Boolean): NavRoute
 }

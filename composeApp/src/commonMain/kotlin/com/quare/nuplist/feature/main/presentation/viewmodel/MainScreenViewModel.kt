@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.feature.main.domain.MainScreenUiAction
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
 import com.quare.nuplist.feature.main.domain.state.MainScreenUiState
-import com.quare.nuplist.feature.main.domain.state.ProfileDialogUiState
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
@@ -18,7 +17,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.guests
@@ -46,11 +44,7 @@ class MainScreenViewModel(
 
     fun dispatchUiEvent(event: MainScreenUiEvent) {
         when (event) {
-            MainScreenUiEvent.ProfilePictureClicked -> changeProfileDialogState(
-                ProfileDialogUiState(
-                    isExitButtonLoading = false
-                )
-            )
+            MainScreenUiEvent.ProfilePictureClicked -> emitAction(MainScreenUiAction.NavigateToProfile)
 
             MainScreenUiEvent.AddGuestClicked -> emitAction(MainScreenUiAction.NavigateToAddGuest)
             is MainScreenUiEvent.BottomNavItemClicked -> emitAction(
@@ -60,12 +54,9 @@ class MainScreenViewModel(
             )
 
             MainScreenUiEvent.LogoutClick -> viewModelScope.launch {
-                changeIsExitLoading(true)
                 supabaseClient.auth.signOut()
-                changeIsExitLoading(false)
             }
 
-            MainScreenUiEvent.DismissDialog -> changeProfileDialogState(null)
         }
     }
 
@@ -91,17 +82,4 @@ class MainScreenViewModel(
             }
         )
 
-    private fun changeProfileDialogState(profileDialogUiState: ProfileDialogUiState?) {
-        _state.update { it.copy(profileDialogUiState = profileDialogUiState) }
-    }
-
-    private fun changeIsExitLoading(isLoading: Boolean) {
-        _state.update {
-            it.copy(
-                profileDialogUiState = it.profileDialogUiState?.copy(
-                    isExitButtonLoading = isLoading
-                )
-            )
-        }
-    }
 }

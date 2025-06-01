@@ -52,6 +52,14 @@ fun NavGraphBuilder.mainNavGraph(
                         paddingValues = it,
                         navController = bottomNavController
                     )
+                },
+                goToProfile = {
+                    appNavController.navigate(
+                        NavRoute.Profile(
+                            userModel = arguments.userModel,
+                            showLogout = true,
+                        )
+                    )
                 }
             )
         }

@@ -8,10 +8,7 @@ import androidx.navigation.NavBackStackEntry
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.core.utils.ActionCollector
 import com.quare.nuplist.feature.main.domain.MainScreenUiAction
-import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
 import com.quare.nuplist.feature.main.presentation.viewmodel.MainScreenViewModel
-import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialog
-import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
 
 @Composable
 fun MainScreen(
@@ -20,29 +17,20 @@ fun MainScreen(
     navBackStackEntry: NavBackStackEntry?,
     goToBottomNavRoute: (Any) -> Unit,
     goToAddGuest: () -> Unit,
+    goToProfile: () -> Unit,
     bottomNavHost: @Composable (PaddingValues) -> Unit,
 ) {
     val onEvent = mainViewModel::dispatchUiEvent
     val state by mainViewModel.state.collectAsState()
     state.profileDialogUiState?.let {
-        ProfileDialog(
-            userModel = userModel,
-            onDismiss = {
-                onEvent(MainScreenUiEvent.DismissDialog)
-            },
-            logoutModel = LogoutModel(
-                onClick = {
-                    onEvent(MainScreenUiEvent.LogoutClick)
-                },
-                isLoading = it.isExitButtonLoading,
-            )
-        )
+
     }
 
     ActionCollector(mainViewModel.uiAction) { uiAction ->
         when (uiAction) {
             is MainScreenUiAction.NavigateToBottomRoute -> goToBottomNavRoute(uiAction.route)
             MainScreenUiAction.NavigateToAddGuest -> goToAddGuest()
+            MainScreenUiAction.NavigateToProfile -> goToProfile()
         }
     }
     MainScreenContent(

@@ -21,7 +21,7 @@ private const val CONTENT_FILL_PERCENTAGE = 0.9f
 fun ProfileDialog(
     onDismiss: () -> Unit,
     showPrivacyPolicyLinks: Boolean = false,
-    logoutModel: LogoutModel? = null,
+    showLogout: Boolean,
     userModel: UserModel? = null,
     viewModel: ProfileDialogViewModel = koinViewModel(),
 ) {
@@ -48,7 +48,7 @@ fun ProfileDialog(
             onDismiss = onDismiss,
             onEvent = viewModel::dispatchUiEvent,
             currentTheme = LocalThemeOption.current,
-            logoutModel = logoutModel,
+            logoutModel = LogoutModel(onClick = {}, isLoading = false).takeIf { showLogout },
             showPrivacyPolicyLinks = showPrivacyPolicyLinks,
             currentLanguage = LocalLanguageOption.current,
         )
