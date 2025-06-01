@@ -2,8 +2,6 @@ package com.quare.nuplist.feature.main.presentation.screen
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavBackStackEntry
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.core.utils.ActionCollector
@@ -21,10 +19,6 @@ fun MainScreen(
     bottomNavHost: @Composable (PaddingValues) -> Unit,
 ) {
     val onEvent = mainViewModel::dispatchUiEvent
-    val state by mainViewModel.state.collectAsState()
-    state.profileDialogUiState?.let {
-
-    }
 
     ActionCollector(mainViewModel.uiAction) { uiAction ->
         when (uiAction) {

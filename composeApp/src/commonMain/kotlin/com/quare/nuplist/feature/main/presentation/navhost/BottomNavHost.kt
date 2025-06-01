@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.quare.nuplist.feature.event_settings.presentation.EventSettingsScreen
 import com.quare.nuplist.feature.guess_list.GuessListScreen
 import com.quare.nuplist.feature.home.HomeScreen
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
@@ -31,6 +32,9 @@ fun BottomNavHost(
 
         composable<BottomNavRoute.GuessList> {
             GuessListScreen()
+        }
+        composable<BottomNavRoute.Event> {
+            EventSettingsScreen()
         }
     }
 }

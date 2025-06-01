@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -53,7 +54,10 @@ fun MainScreenContent(
                         )
                     },
                     label = {
-                        Text(stringResource(presentationItem.title))
+                        Text(
+                            stringResource(presentationItem.title),
+                            textAlign = TextAlign.Center,
+                        )
                     },
                 )
             }

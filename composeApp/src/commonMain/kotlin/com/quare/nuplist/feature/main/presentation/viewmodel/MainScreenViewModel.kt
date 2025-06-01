@@ -3,33 +3,28 @@ package com.quare.nuplist.feature.main.presentation.viewmodel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.feature.main.domain.MainScreenUiAction
 import com.quare.nuplist.feature.main.domain.MainScreenUiEvent
-import com.quare.nuplist.feature.main.domain.state.MainScreenUiState
 import com.quare.nuplist.feature.main.presentation.model.BottomNavRoute
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemModel
 import com.quare.nuplist.feature.main.presentation.model.BottomNavigationItemPresentationModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import nuplist.composeapp.generated.resources.Res
+import nuplist.composeapp.generated.resources.event
 import nuplist.composeapp.generated.resources.guests
 import nuplist.composeapp.generated.resources.home
 
 class MainScreenViewModel : ViewModel() {
 
-    private val _state: MutableStateFlow<MainScreenUiState> = MutableStateFlow(
-        MainScreenUiState(null)
-    )
-    val state: StateFlow<MainScreenUiState> = _state
-
     private val routes: List<BottomNavRoute> = listOf(
         BottomNavRoute.Home,
         BottomNavRoute.GuessList,
+        BottomNavRoute.Event,
     )
 
     private val _uiAction: MutableSharedFlow<MainScreenUiAction> = MutableSharedFlow()
@@ -69,6 +64,11 @@ class MainScreenViewModel : ViewModel() {
                 BottomNavRoute.GuessList -> BottomNavigationItemPresentationModel(
                     title = Res.string.guests,
                     icon = Icons.AutoMirrored.Default.List,
+                )
+
+                BottomNavRoute.Event -> BottomNavigationItemPresentationModel(
+                    title = Res.string.event,
+                    icon = Icons.Default.Info,
                 )
             }
         )
