@@ -4,12 +4,14 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.quare.nuplist.ui.dialog.common.component.DialogTextButton
 import com.quare.nuplist.ui.dialog.common.component.LoadingTextButton
 
 @Composable
 fun DialogComponent(
+    modifier: Modifier = Modifier,
     title: String,
     confirmButtonText: String,
     confirmButtonClick: () -> Unit,
@@ -22,6 +24,7 @@ fun DialogComponent(
     cancelButtonClick: (() -> Unit)? = null,
 ) {
     AlertDialog(
+        modifier = modifier,
         icon = {
             icon?.let {
                 Icon(

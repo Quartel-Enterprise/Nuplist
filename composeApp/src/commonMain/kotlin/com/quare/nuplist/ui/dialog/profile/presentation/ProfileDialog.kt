@@ -19,6 +19,7 @@ private const val CONTENT_FILL_PERCENTAGE = 0.9f
 
 @Composable
 fun ProfileDialog(
+    modifier: Modifier = Modifier,
     onLogoutClick: () -> Unit,
     onDismiss: () -> Unit,
     showPrivacyPolicyLinks: Boolean = false,
@@ -44,7 +45,7 @@ fun ProfileDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         ProfileDialogContent(
-            modifier = Modifier.fillMaxWidth(CONTENT_FILL_PERCENTAGE),
+            modifier = modifier.fillMaxWidth(CONTENT_FILL_PERCENTAGE),
             userModel = userModel,
             onDismiss = onDismiss,
             onEvent = viewModel::dispatchUiEvent,

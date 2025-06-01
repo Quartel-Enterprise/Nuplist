@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import com.quare.nuplist.ui.dialog.common.DialogComponent
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.cancel
@@ -17,11 +18,13 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun LogoutDialog(
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     viewModel: LogoutViewModel = koinViewModel(),
 ) {
     val shouldShowLoadingInConfirmButton by viewModel.shouldShowLoadingInConfirm.collectAsState()
     DialogComponent(
+        modifier = modifier,
         icon = Icons.AutoMirrored.Filled.Logout,
         title = stringResource(Res.string.exit),
         middleContent = {
