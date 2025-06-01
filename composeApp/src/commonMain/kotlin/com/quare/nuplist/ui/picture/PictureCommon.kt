@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
-import com.quare.nuplist.core.theme.isAppInDarkTheme
+import com.quare.nuplist.ui.theme.isAppInDarkTheme
 import com.quare.nuplist.ui.utils.onNullableClick
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.img_fallback_dark

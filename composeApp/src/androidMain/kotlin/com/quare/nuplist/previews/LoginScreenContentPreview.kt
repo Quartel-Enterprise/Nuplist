@@ -1,7 +1,7 @@
 package com.quare.nuplist.previews
 
 import androidx.compose.runtime.Composable
-import com.quare.nuplist.core.theme.AppTheme
+import com.quare.nuplist.ui.theme.AppTheme
 import com.quare.nuplist.feature.login.presentation.screen.LoginScreenContent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -12,6 +12,7 @@ fun LoginScreenContentPreview() {
         LoginScreenContent(
             onEvent = {},
             onLoginWithGoogleClick = {},
+            onLoginWithAppleClick = {},
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.quare.nuplist.core.theme.color.palette
+package com.quare.nuplist.ui.theme.color.palette
 
 import androidx.compose.ui.graphics.Color
 

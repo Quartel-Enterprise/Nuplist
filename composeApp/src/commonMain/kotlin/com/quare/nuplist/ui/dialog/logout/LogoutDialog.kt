@@ -8,8 +8,8 @@ import com.quare.nuplist.ui.dialog.common.DialogComponent
 import nuplist.composeapp.generated.resources.Res
 import nuplist.composeapp.generated.resources.cancel
 import nuplist.composeapp.generated.resources.confirm
+import nuplist.composeapp.generated.resources.exit
 import nuplist.composeapp.generated.resources.logout_dialog_message
-import nuplist.composeapp.generated.resources.logout_dialog_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -19,7 +19,7 @@ fun LogoutDialog(
 ) {
     DialogComponent(
         icon = Icons.AutoMirrored.Filled.Logout,
-        title = stringResource(Res.string.logout_dialog_title),
+        title = stringResource(Res.string.exit),
         middleContent = {
             Text(text = stringResource(Res.string.logout_dialog_message))
         },

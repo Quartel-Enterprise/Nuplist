@@ -22,7 +22,7 @@ class LoginViewModel(
         when (uiEvent) {
             LoginUiEvent.SettingsClick -> _state.update { it.copy(showSettingsDialog = true) }
             LoginUiEvent.OnDismissModal -> _state.update { it.copy(showSettingsDialog = false) }
-            is LoginUiEvent.LoginWithGoogleClick -> uiEvent.nativeSignInState.startFlow()
+            is LoginUiEvent.SocialLoginClicked -> uiEvent.nativeSignInState.startFlow()
         }
     }
 }

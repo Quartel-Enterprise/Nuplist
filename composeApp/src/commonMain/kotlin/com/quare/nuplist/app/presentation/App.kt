@@ -2,6 +2,7 @@ package com.quare.nuplist.app.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -11,7 +12,7 @@ import androidx.compose.ui.Modifier
 import com.quare.nuplist.core.navigation.RootAppNavHost
 import com.quare.nuplist.core.option.LocalOptionChange
 import com.quare.nuplist.core.option.SelectableOption
-import com.quare.nuplist.core.theme.AppTheme
+import com.quare.nuplist.ui.theme.AppTheme
 import com.quare.nuplist.core.option.LocalThemeOption
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -29,7 +30,8 @@ fun App(
         ) {
             AppTheme(getSpecificColors) {
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     RootAppNavHost(getNavigationModifier)
                 }
