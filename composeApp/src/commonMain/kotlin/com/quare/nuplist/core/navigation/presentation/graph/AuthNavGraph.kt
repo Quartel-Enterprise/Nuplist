@@ -14,15 +14,20 @@ fun NavGraphBuilder.authNavGraph(navController: NavController) {
     ) {
         composable<NavRoute.Login> {
             LoginScreen(
-                goToSettings = {
-                    navController.navigate(
-                        NavRoute.Profile(
-                            userModel = null,
-                            shouldShowLogout = false
-                        )
-                    )
-                }
+                goToSettings = navController::goToSettings
             )
         }
+        composable<NavRoute.RegisterEventCode> {
+
+        }
     }
+}
+
+private fun NavController.goToSettings() {
+    navigate(
+        NavRoute.Profile(
+            userModel = null,
+            shouldShowLogout = false
+        )
+    )
 }

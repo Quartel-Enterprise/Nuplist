@@ -12,6 +12,9 @@ sealed interface NavRoute {
     data object Login: NavRoute
 
     @Serializable
+    data object RegisterEventCode: NavRoute
+
+    @Serializable
     data class Main(val userModel: UserModel?): NavRoute
 
     @Serializable
