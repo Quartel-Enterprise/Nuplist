@@ -3,6 +3,7 @@ package com.quare.nuplist.core.navigation.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.core.navigation.domain.RootNavigation
+import com.quare.nuplist.core.user.domain.usecase.PostUserUseCase
 import com.quare.nuplist.feature.login.data.mapper.SessionUserMapper
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.auth
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class RootNavigationViewModel(
+    private val postUser: PostUserUseCase,
     private val userMapper: SessionUserMapper,
     supabaseClient: SupabaseClient,
 ) : ViewModel() {
@@ -26,6 +28,7 @@ class RootNavigationViewModel(
                     when (sessionStatus) {
                         is SessionStatus.Authenticated -> sessionStatus.session.user
                             ?.let(userMapper::map)
+                            ?.also { postUser(it) }
                             ?.let(RootNavigation::Main) ?: return@collect
 
                         SessionStatus.Initializing -> return@collect

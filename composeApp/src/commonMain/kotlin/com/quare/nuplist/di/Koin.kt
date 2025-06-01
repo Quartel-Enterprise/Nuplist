@@ -2,6 +2,7 @@ package com.quare.nuplist.di
 
 import com.quare.nuplist.core.config.configModule
 import com.quare.nuplist.core.navigation.di.navigationModule
+import com.quare.nuplist.core.user.di.userModule
 import com.quare.nuplist.feature.di.loginModule
 import com.quare.nuplist.feature.main.di.mainModule
 import org.koin.core.KoinApplication
@@ -23,6 +24,7 @@ fun initializeKoin(
             mainModule,
             loginModule,
             navigationModule,
+            userModule,
         )
     }
 }
