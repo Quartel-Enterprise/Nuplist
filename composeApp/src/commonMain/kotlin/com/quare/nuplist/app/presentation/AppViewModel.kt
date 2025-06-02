@@ -46,7 +46,10 @@ class AppViewModel(
         _selectableOptions.update {
             it?.copy(
                 theme = if (option is SelectableOption.Theme) option else it.theme,
-                language = if (option is SelectableOption.Language) option else it.language,
+                language = if (option is SelectableOption.Language) {
+                    localization.applyLanguage(option)
+                    option
+                } else it.language,
             )
         }
     }

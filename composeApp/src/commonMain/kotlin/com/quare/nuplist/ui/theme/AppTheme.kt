@@ -29,9 +29,8 @@ fun isAppInDarkTheme(): Boolean = when (LocalThemeOption.current) {
 }
 
 @Composable
-private fun getColorScheme(isDarkTheme: Boolean): ColorScheme {
-    return when {
-        isDarkTheme -> darkScheme
-        else -> lightScheme
-    }
+private fun getColorScheme(isDarkTheme: Boolean): ColorScheme = if (isDarkTheme) {
+    darkScheme
+} else {
+    lightScheme
 }

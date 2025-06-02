@@ -16,14 +16,15 @@ import com.quare.nuplist.ui.utils.back.LocalBack
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun RootAppNavHost(getNavigationModifier: (onBack: () -> Unit) -> Modifier) {
+fun RootAppNavHost(
+    getNavigationModifier: (onBack: () -> Unit) -> Modifier,
+) {
     val viewmodel: RootNavigationViewModel = koinViewModel()
     val appNavController: NavHostController = rememberNavController()
     CollectAppNavActions(
         appNavController = appNavController,
         navigationActions = viewmodel.navigateChannel,
     )
-
     CompositionLocalProvider(LocalBack provides appNavController.getMapOfNavigationBack()) {
         NavHost(
             modifier = getNavigationModifier(appNavController::navigateUp),
