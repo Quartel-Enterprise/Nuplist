@@ -11,7 +11,6 @@ import com.quare.nuplist.core.option.LocalOptionChange
 import com.quare.nuplist.core.option.LocalThemeOption
 import com.quare.nuplist.core.user.domain.model.UserModel
 import com.quare.nuplist.core.utils.ActionCollector
-import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
 import com.quare.nuplist.ui.dialog.profile.presentation.model.ProfileDialogUiAction
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -20,11 +19,10 @@ private const val CONTENT_FILL_PERCENTAGE = 0.9f
 @Composable
 fun ProfileDialog(
     modifier: Modifier = Modifier,
-    onLogoutClick: () -> Unit,
     onDismiss: () -> Unit,
     showPrivacyPolicyLinks: Boolean = false,
-    shouldShowLogout: Boolean,
     userModel: UserModel? = null,
+    onLogoutClick: (() -> Unit)? = null,
     viewModel: ProfileDialogViewModel = koinViewModel(),
 ) {
     val uriHandler = LocalUriHandler.current
@@ -44,16 +42,14 @@ fun ProfileDialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
+        // TODO("Change to top: https://stackoverflow.com/questions/79648090/how-to-position-a-dialog-in-a-different-position-than-the-middle-in-compose-mult")
         ProfileDialogContent(
             modifier = modifier.fillMaxWidth(CONTENT_FILL_PERCENTAGE),
             userModel = userModel,
             onDismiss = onDismiss,
             onEvent = viewModel::dispatchUiEvent,
             currentTheme = LocalThemeOption.current,
-            logoutModel = LogoutModel(
-                onClick = onLogoutClick,
-                isLoading = false,
-            ).takeIf { shouldShowLogout },
+            onLogoutClick = onLogoutClick,
             showPrivacyPolicyLinks = showPrivacyPolicyLinks,
             currentLanguage = LocalLanguageOption.current,
         )

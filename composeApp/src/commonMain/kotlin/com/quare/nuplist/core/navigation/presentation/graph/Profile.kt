@@ -28,9 +28,8 @@ fun NavGraphBuilder.profileDialog(
                 onLogoutClick = {
                     popBackStack()
                     navigate(NavRoute.Logout)
-                },
+                }.takeIf { arguments.shouldShowLogout },
                 userModel = arguments.userModel,
-                shouldShowLogout = arguments.shouldShowLogout,
                 onDismiss = ::navigateUp,
             )
         }

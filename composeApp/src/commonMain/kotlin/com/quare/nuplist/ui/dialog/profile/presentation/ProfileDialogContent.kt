@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,21 +18,20 @@ import com.quare.nuplist.ui.dialog.profile.presentation.component.DialogProfileH
 import com.quare.nuplist.ui.dialog.profile.presentation.component.LogoutOption
 import com.quare.nuplist.ui.dialog.profile.presentation.component.UserPictureNameAndEmail
 import com.quare.nuplist.ui.dialog.profile.presentation.component.link.LinksRow
-import com.quare.nuplist.ui.dialog.profile.presentation.model.LogoutModel
 import com.quare.nuplist.ui.dialog.profile.presentation.model.ProfileDialogUiEvent
 import com.quare.nuplist.ui.spacer.VerticalSpacer
 import com.quare.nuplist.ui.theme_selector.presentation.Selector
 
 @Composable
 fun ProfileDialogContent(
+    modifier: Modifier = Modifier,
     currentTheme: SelectableOption.Theme,
     currentLanguage: SelectableOption.Language,
-    logoutModel: LogoutModel?,
     showPrivacyPolicyLinks: Boolean,
     userModel: UserModel?,
     onDismiss: () -> Unit,
     onEvent: (ProfileDialogUiEvent) -> Unit,
-    modifier: Modifier = Modifier,
+    onLogoutClick: (() -> Unit)?,
 ) {
     Card(
         modifier = modifier,
@@ -67,12 +65,8 @@ fun ProfileDialogContent(
                 currentLanguage = currentLanguage
             )
             VerticalSpacer(24)
-            logoutModel?.let {
-                if (it.isLoading) {
-                    CircularProgressIndicator()
-                } else {
-                    LogoutOption(onLogout = it.onClick)
-                }
+            onLogoutClick?.let {
+                LogoutOption(onLogout = it)
             }
             if (showPrivacyPolicyLinks) {
                 VerticalSpacer(4)
