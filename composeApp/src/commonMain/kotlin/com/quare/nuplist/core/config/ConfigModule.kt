@@ -6,6 +6,7 @@ import com.quare.nuplist.app.domain.GetThemeOptionUseCase
 import com.quare.nuplist.app.presentation.AppViewModel
 import com.quare.nuplist.ui.dialog.profile.presentation.ProfileDialogViewModel
 import com.quare.nuplist.ui.dialog.logout.presentation.LogoutViewModel
+import com.quare.nuplist.ui.theme_selector.domain.SaveSelectableOptionUseCase
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.auth.AuthConfig
@@ -42,10 +43,13 @@ val configModule = module {
         }
     }
     factory {
-        GetThemeOptionUseCase()
+        GetThemeOptionUseCase(get())
     }
     factory {
         GetLanguageOptionUseCase()
+    }
+    factory {
+        SaveSelectableOptionUseCase(get())
     }
     viewModelOf(::AppViewModel)
     viewModelOf(::ProfileDialogViewModel)

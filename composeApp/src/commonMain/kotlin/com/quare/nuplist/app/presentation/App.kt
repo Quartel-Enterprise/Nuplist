@@ -11,9 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.quare.nuplist.core.navigation.presentation.RootAppNavHost
 import com.quare.nuplist.core.option.LocalOptionChange
+import com.quare.nuplist.core.option.LocalThemeOption
 import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.ui.theme.AppTheme
-import com.quare.nuplist.core.option.LocalThemeOption
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

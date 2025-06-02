@@ -1,5 +1,8 @@
 package com.quare.nuplist.di
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import com.quare.nuplist.core.config.createDataStore
 import com.quare.nuplist.core.internationalization.domain.Localization
 import com.quare.nuplist.core.supabase.IosSupabaseAuthDeeplinkHandler
 import org.koin.core.module.Module
@@ -10,5 +13,9 @@ actual val platformModule: Module = module {
 
     factory<SupabaseAuthDeeplinkHandler> {
         IosSupabaseAuthDeeplinkHandler(get())
+    }
+
+    single<DataStore<Preferences>> {
+        createDataStore()
     }
 }

@@ -11,20 +11,21 @@ import com.quare.nuplist.app.presentation.App
 import com.quare.nuplist.di.initializeKoin
 
 @OptIn(ExperimentalFoundationApi::class)
-fun main() = application {
+fun main() {
     initializeKoin()
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "Nuplist",
-    ) {
-
-        App(
-            getNavigationModifier = { onBack ->
-                Modifier.onClick(
-                    matcher = PointerMatcher.mouse(PointerButton.Back),
-                    onClick = onBack,
-                )
-            }
-        )
+    application {
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Nuplist",
+        ) {
+            App(
+                getNavigationModifier = { onBack ->
+                    Modifier.onClick(
+                        matcher = PointerMatcher.mouse(PointerButton.Back),
+                        onClick = onBack,
+                    )
+                }
+            )
+        }
     }
 }

@@ -16,7 +16,7 @@ fun optionSelectorViewModel(
         initializer {
             OptionSelectorViewModel(
                 optionSelected = optionSelected,
-                onOptionSelected = onOptionChange
+                onOptionSelected = onOptionChange,
             )
         }
     }

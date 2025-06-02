@@ -33,7 +33,7 @@ sealed class SelectableOption(
     ) : SelectableOption(
         name = name,
         icon = icon,
-        key = "theme",
+        key = PreferencesKeys.THEME,
         menuIcon = Icons.Filled.Brush,
         menuName = Res.string.theme,
     ) {
@@ -58,7 +58,7 @@ sealed class SelectableOption(
     sealed class Language(name: StringResource) : SelectableOption(
         name = name,
         icon = null,
-        key = "language",
+        key = PreferencesKeys.LANGUAGE,
         menuIcon = Icons.Filled.Language,
         menuName = Res.string.language,
     ) {

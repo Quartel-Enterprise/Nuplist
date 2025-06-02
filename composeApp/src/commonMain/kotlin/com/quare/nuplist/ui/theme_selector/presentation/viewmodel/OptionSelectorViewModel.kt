@@ -1,8 +1,8 @@
 package com.quare.nuplist.ui.theme_selector.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.quare.nuplist.core.utils.UiEventExecutor
 import com.quare.nuplist.core.option.SelectableOption
+import com.quare.nuplist.core.utils.UiEventExecutor
 import com.quare.nuplist.ui.theme_selector.domain.SelectorUiEvent
 import com.quare.nuplist.ui.theme_selector.domain.SelectorUiState
 import kotlinx.coroutines.flow.MutableStateFlow

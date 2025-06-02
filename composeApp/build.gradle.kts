@@ -89,6 +89,10 @@ kotlin {
 
             // Kermit (logger)
             implementation(libs.kermit)
+
+            // Data Store
+            implementation(libs.dataStore)
+            implementation(libs.dataStore.preferences)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
