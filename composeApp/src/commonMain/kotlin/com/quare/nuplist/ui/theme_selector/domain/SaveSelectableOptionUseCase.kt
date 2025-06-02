@@ -11,12 +11,21 @@ class SaveSelectableOptionUseCase(
 ) {
 
     suspend operator fun invoke(option: SelectableOption) {
-        if (option is SelectableOption.Theme) {
-            dataStore.edit {
-                it[stringPreferencesKey(option.key)] = when (option) {
-                    SelectableOption.Theme.Dark -> "dark"
-                    SelectableOption.Theme.Light -> "light"
-                    SelectableOption.Theme.System -> "system"
+        dataStore.edit {
+            it[stringPreferencesKey(option.key)] = when (option) {
+                is SelectableOption.Theme ->
+                    when (option) {
+                        SelectableOption.Theme.Dark -> "dark"
+                        SelectableOption.Theme.Light -> "light"
+                        SelectableOption.Theme.System -> "system"
+                    }
+
+                is SelectableOption.Language -> {
+                    when (option) {
+                        SelectableOption.Language.EnglishUnitedStates -> "en_US"
+                        SelectableOption.Language.PortugueseBrazil -> "pt_BR"
+                        SelectableOption.Language.System -> "system"
+                    }
                 }
             }
         }

@@ -1,12 +1,30 @@
 package com.quare.nuplist.core.internationalization.domain
 
-import java.util.Locale
+import com.quare.nuplist.core.option.SelectableOption
+import java.util.*
 
 actual class Localization {
-    actual fun applyLanguage(iso: String) {
-        val locale = Locale.Builder()
-            .setLanguage(iso)
+    actual fun applyLanguage(language: SelectableOption.Language) {
+        val portugueseBrazilLocale = Locale.Builder()
+            .setLanguage("pt")
+            .setRegion("BR")
             .build()
+
+        val englishUnitedStatesLocale = Locale.Builder()
+            .setLanguage("en")
+            .setRegion("US")
+            .build()
+
+        val locale = when (language) {
+            SelectableOption.Language.PortugueseBrazil -> portugueseBrazilLocale
+            SelectableOption.Language.EnglishUnitedStates -> englishUnitedStatesLocale
+            SelectableOption.Language.System -> getSystemLocale().takeIf {
+                it == portugueseBrazilLocale || it == englishUnitedStatesLocale
+            } ?: englishUnitedStatesLocale
+        }
+
         Locale.setDefault(locale)
     }
+
+    private fun getSystemLocale(): Locale = Locale.getDefault()
 }

@@ -46,10 +46,12 @@ val configModule = module {
         GetThemeOptionUseCase(get())
     }
     factory {
-        GetLanguageOptionUseCase()
+        GetLanguageOptionUseCase(get())
     }
     factory {
-        SaveSelectableOptionUseCase(get())
+        SaveSelectableOptionUseCase(
+            dataStore = get(),
+        )
     }
     viewModelOf(::AppViewModel)
     viewModelOf(::ProfileDialogViewModel)

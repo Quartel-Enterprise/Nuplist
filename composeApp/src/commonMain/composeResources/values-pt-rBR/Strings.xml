@@ -23,8 +23,8 @@
     <string name="system">Sistema</string>
     <string name="add_guest">Adicionar convidado</string>
     <string name="back">Voltar</string>
-    <string name="english">Inglês</string>
-    <string name="portuguese_brazil">Português Brasil</string>
+    <string name="english">Inglês (EUA)</string>
+    <string name="portuguese_brazil">Português (Brasil)</string>
     <string name="event_settings">Configurações do Evento</string>
     <string name="event">Evento</string>
 </resources>

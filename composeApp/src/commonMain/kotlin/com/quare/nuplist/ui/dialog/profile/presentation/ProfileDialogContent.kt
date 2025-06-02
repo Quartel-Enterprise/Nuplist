@@ -89,8 +89,8 @@ fun ProfileDialogContent(
 private fun CardSelectors(
     modifier: Modifier = Modifier,
     currentTheme: SelectableOption.Theme,
-    onEvent: (ProfileDialogUiEvent) -> Unit,
     currentLanguage: SelectableOption.Language,
+    onEvent: (ProfileDialogUiEvent) -> Unit,
 ) {
     Card(modifier = modifier) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -107,7 +107,8 @@ private fun CardSelectors(
             )
             Selector(
                 options = listOf(
-                    SelectableOption.Language.English,
+                    SelectableOption.Language.System,
+                    SelectableOption.Language.EnglishUnitedStates,
                     SelectableOption.Language.PortugueseBrazil,
                 ),
                 currentOption = currentLanguage,

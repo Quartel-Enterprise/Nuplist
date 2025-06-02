@@ -9,5 +9,5 @@ val LocalThemeOption: ProvidableCompositionLocal<SelectableOption.Theme> = compo
 
 val LocalLanguageOption: ProvidableCompositionLocal<SelectableOption.Language> =
     compositionLocalOf {
-        SelectableOption.Language.English
+        SelectableOption.Language.System
     }

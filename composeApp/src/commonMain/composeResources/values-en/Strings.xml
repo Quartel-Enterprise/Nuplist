@@ -23,8 +23,8 @@
     <string name="system">System</string>
     <string name="add_guest">Add guest</string>
     <string name="back">Back</string>
-    <string name="english">English</string>
-    <string name="portuguese_brazil">Portuguese Brazil</string>
+    <string name="english">English (USA)</string>
+    <string name="portuguese_brazil">Portuguese (Brazil)</string>
     <string name="event_settings">Event Settings</string>
     <string name="event">Event</string>
 </resources>

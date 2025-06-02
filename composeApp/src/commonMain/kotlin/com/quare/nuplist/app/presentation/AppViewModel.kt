@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quare.nuplist.app.domain.GetLanguageOptionUseCase
 import com.quare.nuplist.app.domain.GetThemeOptionUseCase
+import com.quare.nuplist.core.internationalization.domain.Localization
 import com.quare.nuplist.core.option.SelectableOption
 import com.quare.nuplist.core.option.SelectedOptions
 import kotlinx.coroutines.async
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 class AppViewModel(
     private val getThemeOption: GetThemeOptionUseCase,
     private val getLanguageOption: GetLanguageOptionUseCase,
+    private val localization: Localization,
 ) : ViewModel() {
 
     private val _selectableOptions: MutableStateFlow<SelectedOptions?> =
@@ -22,17 +24,19 @@ class AppViewModel(
     val selectableOptions: StateFlow<SelectedOptions?> = _selectableOptions
 
     init {
-        updateThemeOption()
+        updateUserPreferences()
     }
 
-    private fun updateThemeOption() {
+    private fun updateUserPreferences() {
         viewModelScope.launch {
             val themeOptionDeferred = async { getThemeOption() }
             val languageOptionDeferred = async { getLanguageOption() }
+            val language = languageOptionDeferred.await()
+            localization.applyLanguage(language)
             _selectableOptions.update {
                 SelectedOptions(
                     theme = themeOptionDeferred.await(),
-                    language = languageOptionDeferred.await(),
+                    language = language,
                 )
             }
         }

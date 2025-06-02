@@ -62,10 +62,12 @@ sealed class SelectableOption(
         menuIcon = Icons.Filled.Language,
         menuName = Res.string.language,
     ) {
-        override fun getDefault(): SelectableOption = English
+        override fun getDefault(): SelectableOption = System
+
+        data object System: Language(name = Res.string.system)
 
         data object PortugueseBrazil : Language(name = Res.string.portuguese_brazil)
 
-        data object English : Language(name = Res.string.english)
+        data object EnglishUnitedStates : Language(name = Res.string.english)
     }
 }
