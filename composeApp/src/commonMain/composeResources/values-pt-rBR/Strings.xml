@@ -10,6 +10,7 @@
     <string name="apple_login_text">Entrar com Apple</string>
     <string name="logout_dialog_message">Tem certeza que deseja encerrar a sessão?</string>
     <string name="confirm">Confirmar</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="close">Fechar</string>
     <string name="exit">Sair</string>
@@ -27,4 +28,6 @@
     <string name="portuguese_brazil">Português (Brasil)</string>
     <string name="event_settings">Configurações do Evento</string>
     <string name="event">Evento</string>
+    <string name="language_change_title">Alteração de Idioma</string>
+    <string name="language_change_message">Após fechar esse dialog o novo idioma escolhido deve ser automaticamente aplicado. Caso isso não aconteça, por favor reinicie a aplicação.</string>
 </resources>

@@ -10,11 +10,13 @@ import com.quare.nuplist.core.navigation.presentation.graph.loginScreen
 import com.quare.nuplist.core.navigation.presentation.graph.logoutDialog
 import com.quare.nuplist.core.navigation.presentation.graph.mainScreen
 import com.quare.nuplist.core.navigation.presentation.graph.profileDialog
+import com.quare.nuplist.core.navigation.presentation.graph.restartTheAppDialog
 
 fun NavGraphBuilder.buildNavHost(
     appNavController: NavHostController,
     getNavigationModifier: (onBack: () -> Unit) -> Modifier,
 ) {
+    val dialogModifier = getNavigationModifier(appNavController::navigateUp)
     loginScreen(appNavController)
     mainScreen(
         appNavController = appNavController,
@@ -23,11 +25,15 @@ fun NavGraphBuilder.buildNavHost(
     addGuestScreen(appNavController)
     profileDialog(
         navController = appNavController,
-        modifier = getNavigationModifier(appNavController::navigateUp)
+        modifier = dialogModifier
     )
     logoutDialog(
         navController = appNavController,
-        modifier = getNavigationModifier(appNavController::navigateUp)
+        modifier = dialogModifier
+    )
+    restartTheAppDialog(
+        modifier = dialogModifier,
+        navController = appNavController,
     )
     composable<NavRoute.Loading> {}
 }

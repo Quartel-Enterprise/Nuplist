@@ -13,15 +13,18 @@ import com.quare.nuplist.core.navigation.presentation.viewmodel.RootNavigationVi
 import com.quare.nuplist.ui.utils.back.BackNavigationMap
 import com.quare.nuplist.ui.utils.back.BackNavigationType
 import com.quare.nuplist.ui.utils.back.LocalBack
+import kotlinx.coroutines.flow.Flow
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RootAppNavHost(
+    restartTheAppActionFlow: Flow<Unit>,
     getNavigationModifier: (onBack: () -> Unit) -> Modifier,
 ) {
     val viewmodel: RootNavigationViewModel = koinViewModel()
     val appNavController: NavHostController = rememberNavController()
     CollectAppNavActions(
+        restartTheAppActionFlow = restartTheAppActionFlow,
         appNavController = appNavController,
         navigationActions = viewmodel.navigateChannel,
     )
@@ -31,7 +34,10 @@ fun RootAppNavHost(
             navController = appNavController,
             startDestination = NavRoute.Loading,
             builder = {
-                buildNavHost(appNavController, getNavigationModifier)
+                buildNavHost(
+                    appNavController = appNavController,
+                    getNavigationModifier = getNavigationModifier
+                )
             }
         )
     }

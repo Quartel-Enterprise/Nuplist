@@ -9,6 +9,7 @@
     <string name="google_login_text">Login with Google</string>
     <string name="apple_login_text">Login with Apple</string>
     <string name="logout_dialog_message">Are you sure you want to log out?</string>
+    <string name="ok">OK</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
@@ -27,4 +28,6 @@
     <string name="portuguese_brazil">Portuguese (Brazil)</string>
     <string name="event_settings">Event Settings</string>
     <string name="event">Event</string>
+    <string name="language_change_title">Language changed</string>
+    <string name="language_change_message">After closing this dialog the new chosen language should be automatically applied. If this does not happen, please restart the application.</string>
 </resources>

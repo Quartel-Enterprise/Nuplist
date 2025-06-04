@@ -25,4 +25,7 @@ sealed interface NavRoute {
 
     @Serializable
     data object Logout: NavRoute
+
+    @Serializable
+    data object RestartTheApp: NavRoute
 }

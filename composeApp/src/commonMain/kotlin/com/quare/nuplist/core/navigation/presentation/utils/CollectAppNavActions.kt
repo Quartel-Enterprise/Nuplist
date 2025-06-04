@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun CollectAppNavActions(
     appNavController: NavHostController,
+    restartTheAppActionFlow: Flow<Unit>,
     navigationActions: Flow<RootNavigation>,
 ) {
     appNavController.run {
@@ -19,6 +20,9 @@ fun CollectAppNavActions(
                 is RootNavigation.Login -> navigateDroppingAll(NavRoute.Login)
                 is RootNavigation.Main -> navigateDroppingAll(NavRoute.Main(navigation.userModel))
             }
+        }
+        ActionCollector(restartTheAppActionFlow) {
+            navigate(NavRoute.RestartTheApp)
         }
     }
 }

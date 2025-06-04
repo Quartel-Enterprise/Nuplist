@@ -18,13 +18,9 @@ actual class Localization {
         val locale = when (language) {
             SelectableOption.Language.PortugueseBrazil -> portugueseBrazilLocale
             SelectableOption.Language.EnglishUnitedStates -> englishUnitedStatesLocale
-            SelectableOption.Language.System -> getSystemLocale().takeIf {
-                it == portugueseBrazilLocale || it == englishUnitedStatesLocale
-            } ?: englishUnitedStatesLocale
+            SelectableOption.Language.System -> Locale.getDefault()
         }
 
         Locale.setDefault(locale)
     }
-
-    private fun getSystemLocale(): Locale = Locale.getDefault()
 }
