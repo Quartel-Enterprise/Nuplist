@@ -11,7 +11,7 @@ import nuplist.composeapp.generated.resources.language_change_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun RestartAppDialog(
+fun LanguageChangeDialog(
     modifier: Modifier,
     onDismiss: () -> Unit,
 ) {
